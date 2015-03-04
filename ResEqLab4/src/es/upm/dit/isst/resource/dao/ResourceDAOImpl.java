@@ -31,10 +31,10 @@ public class ResourceDAOImpl implements ResourceDAO {
 	}
 
 	@Override
-	public void add(String userId, String title, String description) {
+	public void add(String title, String description) {
 		synchronized (this) {
 			EntityManager em = EMFService.get().createEntityManager();
-			Resource resource = new Resource(userId, title, description);
+			Resource resource = new Resource(title, description);
 			em.persist(resource);
 			em.close();
 		}
@@ -42,11 +42,12 @@ public class ResourceDAOImpl implements ResourceDAO {
 	}
 
 	@Override
-	public List<Resource> getResources(String userId) {
+	public List<Resource> getResources() {
 		EntityManager em = EMFService.get().createEntityManager();
 		Query q = em
-				.createQuery("select t from Resource t where t.author = :userId");
-		q.setParameter("userId", userId);
+				.createQuery("select t from Resource t ");
+		System.out.println(q.getResultList());
+		//q.setParameter("userId", userId);
 		List<Resource> resources = q.getResultList();
 		return resources;
 	}
@@ -66,7 +67,7 @@ public class ResourceDAOImpl implements ResourceDAO {
 	public List<String> getUsers() {
 		EntityManager em = EMFService.get().createEntityManager();
 		Query q = em
-				.createQuery("select distinct t.author from Todo t");
+				.createQuery("select distinct t from Resource t");
 		List<String> users = q.getResultList();
 		return users;
 	}

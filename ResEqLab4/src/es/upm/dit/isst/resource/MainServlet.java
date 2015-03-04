@@ -34,11 +34,12 @@ public class MainServlet extends HttpServlet {
 		List<Resource> resources = new ArrayList<Resource>();
 		            
 		if (user != null){
+		//if (true){
 		    url = userService.createLogoutURL(req.getRequestURI());
 		    urlLinktext = "Logout";
-		    resources = dao.getResources(user.getNickname());
 		}
-		
+	    resources = dao.getResources();
+
 		req.getSession().setAttribute("user", user);
 		req.getSession().setAttribute("resources", new ArrayList<Resource>(resources));
 		req.getSession().setAttribute("url", url);

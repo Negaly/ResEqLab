@@ -35,9 +35,9 @@ public class EmailServlet extends HttpServlet {
 			String description = getText(message);
 			Address[] addresses = message.getFrom();
 			InternetAddress emailAddress = new InternetAddress(addresses[0].toString());
-			User user = new User(emailAddress.getAddress(), "gmail.com");
+			//User user = new User(emailAddress.getAddress(), "gmail.com");
 			ResourceDAO dao = ResourceDAOImpl.getInstance();
-			dao.add(user.getNickname(), title, description);
+			dao.add(title, description);
 
 		} catch (Exception e) {
 			e.printStackTrace();

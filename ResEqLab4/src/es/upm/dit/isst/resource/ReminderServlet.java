@@ -27,7 +27,7 @@ public class ReminderServlet extends HttpServlet {
 		ResourceDAO dao = ResourceDAOImpl.getInstance();
 		List<String> users = dao.getUsers();
 		for (String user : users) {
-			List<Resource> resources = dao.getResources(user);
+			List<Resource> resources = dao.getResources();
 			
 			if (resources.size() > 0) {
 				try {

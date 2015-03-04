@@ -23,7 +23,6 @@
 				<div style="float: right;">
 					<a
 						href="<c:url value="${url}"/>"><c:out value="${urlLinktext}"/></a>
-					<c:if test="${user != null}"><c:out value="${user.nickname}"/></c:if>
 				</div>
 			</div>
 		</div>
@@ -58,8 +57,6 @@
 	
 			<div class="headline">New resource</div>
 	
-			<c:choose>
-				<c:when test="${user != null}">
 					<form action="/new" method="post" accept-charset="utf-8">
 						<table>
 							<tr>
@@ -78,12 +75,7 @@
 							</tr>
 						</table>
 					</form>
-				</c:when>
-				<c:otherwise>
-	
-	Please login with your Google account
-				</c:otherwise>
-			</c:choose>
+
 		</div>
 	</body>
 </html>

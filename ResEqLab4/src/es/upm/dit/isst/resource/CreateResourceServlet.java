@@ -20,20 +20,20 @@ public class CreateResourceServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		System.out.println("Creating new Resource ");
-		User user = (User) req.getAttribute("user");
+		/*User user = (User) req.getAttribute("user");
 		if (user == null) {
 			UserService userService = UserServiceFactory.getUserService();
 			user = userService.getCurrentUser();
 		}
-
+		*/
 		String title = checkNull(req.getParameter("title"));
 		String Description = checkNull(req.getParameter("description"));
 		
 
 		ResourceDAO dao = ResourceDAOImpl.getInstance();
-		dao.add(user.getNickname(), title, Description);
+		dao.add(title, Description);
 
-		resp.sendRedirect("/");
+		resp.sendRedirect("/main");
 	}
 
 	private String checkNull(String s) {

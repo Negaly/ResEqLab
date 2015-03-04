@@ -15,13 +15,10 @@ public class Resource implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String author;
-
 	private String title;
 	private String description;
 	
-	public Resource(String author, String title, String description) {
-		this.author = author;
+	public Resource(String title, String description) {
 		this.title = title;
 		this.description = description;
 		
@@ -30,15 +27,7 @@ public class Resource implements Serializable {
 	public Long getId() {
 		return id;
 	}
-
-	public String getAuthor() {
-		return author;
-	}
-
-	public void setAuthor(String author) {
-		this.author = author;
-	}
-
+	
 	public String getTitle() {
 		return title;
 	}
