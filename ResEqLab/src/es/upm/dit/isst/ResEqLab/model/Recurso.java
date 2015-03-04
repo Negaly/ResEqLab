@@ -1,6 +1,7 @@
 package es.upm.dit.isst.ResEqLab.model;
 
 import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,20 +13,27 @@ public class Recurso implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String author;
 	private String title;
-
 	private String description;
 
-	boolean finished;
-
-	public Recurso(String title, String description) {
+	
+	public Recurso(String author ,String title, String description) {
 		this.title = title;
-
+		this.author = author;
 		this.description = description;
 	}
 
 	public Long getId() {
 		return id;
+	}
+	
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
 	public String getTitle() {
