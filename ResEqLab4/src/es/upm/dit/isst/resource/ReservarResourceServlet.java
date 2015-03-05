@@ -18,12 +18,11 @@ import es.upm.dit.isst.resource.dao.ResourceDAO;
 import es.upm.dit.isst.resource.dao.ResourceDAOImpl;
 import es.upm.dit.isst.resource.model.Resource;
 
-public class MainServlet extends HttpServlet {
+public class ReservarResourceServlet extends HttpServlet {
+  private static final long serialVersionUID = 1L;
 
-	private static final long serialVersionUID = 1L;
-
-	public void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws IOException, ServletException {
+  public void doGet(HttpServletRequest req, HttpServletResponse resp)
+  throws IOException, ServletException {
 		ResourceDAO dao = ResourceDAOImpl.getInstance();
 
 		UserService userService = UserServiceFactory.getUserService();
@@ -46,9 +45,7 @@ public class MainServlet extends HttpServlet {
 		req.getSession().setAttribute("url", url);
 		req.getSession().setAttribute("urlLinktext", urlLinktext);
 		
-		RequestDispatcher view = req.getRequestDispatcher("ResourceApplication.jsp");
-        view.forward(req, resp);
-		
-	}
-
+		RequestDispatcher view = req.getRequestDispatcher("ResourceResApplication.jsp");
+		view.forward(req, resp);
+} 
 }

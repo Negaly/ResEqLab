@@ -24,10 +24,21 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>Reminder</servlet-name>
 		<servlet-class>es.upm.dit.isst.resource.ReminderServlet</servlet-class>
 	</servlet>
-
+	<servlet>
+		<servlet-name>Reservar</servlet-name>
+		<servlet-class>es.upm.dit.isst.resource.ReservarResourceServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Reservar</servlet-name>
+		<url-pattern>/reservar</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Reminder</servlet-name>
 		<url-pattern>/reminder</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CreateResource</servlet-name>
+		<url-pattern>/create</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>

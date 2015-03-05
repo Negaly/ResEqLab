@@ -6,11 +6,9 @@
 <%@page isELIgnored="false"%>
 
 <!DOCTYPE html>
-
-
 <html>
 <head>
-<title>Resources</title>
+<title>New Resource</title>
 <link rel="stylesheet" type="text/css" href="css/main.css" />
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <meta charset="utf-8">
@@ -61,41 +59,28 @@
 		</div>
 		<!-- /.container-fluid -->
 	</nav>
-	<div style="width: 100%;">
-		<div class="line"></div>
-		<div class="topLine">
-			<div style="float: left;" class="headline">Resources</div>
-			<div style="float: right;"></div>
-		</div>
+		<div class="headline">New resource</div>
+
+		<form action="/new" method="post" accept-charset="utf-8">
+			<table>
+				<tr>
+					<td><label for="title">Title</label></td>
+					<td><input type="text" name="title" id="title" size="65" /></td>
+				</tr>
+				<tr>
+					<td valign="description"><label for="description">Description</label></td>
+					<td><textarea rows="4" cols="50" name="description"
+							id="description"></textarea></td>
+				</tr>
+
+				<tr>
+					<td colspan="2" align="right"><input type="submit"
+						value="Create" /></td>
+				</tr>
+			</table>
+		</form>
+
 	</div>
-
-	<div style="clear: both;" />
-	You have a total number of
-	<c:out value="${fn:length(resources)}" />
-	Resources.
-
-	<table>
-		<tr>
-			<th>Title</th>
-			<th>Description</th>
-
-		</tr>
-
-		<c:forEach items="${resources}" var="resource">
-			<tr>
-				<td><c:out value="${resource.title}" /></td>
-				<td><c:out value="${resource.description}" /></td>
-									<c:choose>
-					<c:when	test="${user == 'admin@example.com'}">
-					<td><a class="done"
-					href="<c:url value="/remove?id=${resource.id}" />">Remove</a></td>
-</c:when>
-					</c:choose>
-
-			</tr>
-		</c:forEach>
-	</table>
-	<hr />
 	<script src="js/bootstrap.min.js"></script>
 </body>
 </html>
