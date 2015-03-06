@@ -6,11 +6,9 @@
 <%@page isELIgnored="false"%>
 
 <!DOCTYPE html>
-
-
 <html>
 <head>
-<title>Resources</title>
+<title>New User</title>
 <link rel="stylesheet" type="text/css" href="css/main.css" />
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <meta charset="utf-8">
@@ -61,41 +59,69 @@
 		</div>
 		<!-- /.container-fluid -->
 	</nav>
+	
 	<div style="width: 100%;">
 		<div class="line"></div>
 		<div class="topLine">
-			<div style="float: left;" class="headline">Resources</div>
+			<div style="float: left;" class="headline">Users</div>
 			<div style="float: right;"></div>
 		</div>
 	</div>
 
 	<div style="clear: both;" />
 	You have a total number of
-	<c:out value="${fn:length(resources)}" />
-	Resources.
+	<c:out value="${fn:length(users)}" />
+	Users
 
 	<table>
 		<tr>
-			<th>Title</th>
-			<th>Description</th>
-
+			<th>Nickname</th>
+			<th>Name</th>
+			<th>Pass</th>
 		</tr>
 
-		<c:forEach items="${resources}" var="resource">
+		<c:forEach items="${users}" var="user">
 			<tr>
-				<td><c:out value="${resource.title}" /></td>
-				<td><c:out value="${resource.description}" /></td>
-									<c:choose>
-					<c:when	test="${user == 'admin@example.com'}">
+				<td><c:out value="${user.nickname}" /></td>
+				<td><c:out value="${user.name}" /></td>
+				<td><c:out value="${user.pass}" /></td>
+									
+					
 					<td><a class="done"
-					href="<c:url value="/remove?id=${resource.id}" />">Remove</a></td>
-</c:when>
-					</c:choose>
+					href="<c:url value="/removeUser?id=${user.id}" />">Remove</a></td>
+
+					
 
 			</tr>
 		</c:forEach>
 	</table>
-	<hr />
+	
+		<div class="headline">New User</div>
+
+		<form action="/newUser" method="post" accept-charset="utf-8">
+			<table>
+				<tr>
+					<td><label for="nickname">Nickname</label></td>
+					<td><input type="text" name="nickname" id="nickname" size="65" /></td>
+				</tr>
+				<tr>
+					<td valign="name"><label for="name">Name</label></td>
+					<td><textarea rows="4" cols="50" name="name"
+							id="name"></textarea></td>
+				</tr>
+				<tr>
+					<td><label for="pass">Password</label></td>
+					<td><input type="text" name="pass" id="pass" size="65" /></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="right"><input type="submit"
+						value="Create User" /></td>
+				</tr>
+				
+			</table>
+		</form>
+
+	</div>
 	<script src="js/bootstrap.min.js"></script>
 </body>
 </html>
