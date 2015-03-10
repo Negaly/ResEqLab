@@ -29,6 +29,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-class>es.upm.dit.isst.resource.ReminderServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>Login</servlet-name>
+		<servlet-class>es.upm.dit.isst.user.LoginServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>Reservar</servlet-name>
 		<servlet-class>es.upm.dit.isst.resource.ReservarResourceServlet</servlet-class>
 	</servlet>
@@ -68,6 +72,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	<servlet-mapping>
 		<servlet-name>Main</servlet-name>
 		<url-pattern>/main</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Login</servlet-name>
+		<url-pattern>/login</url-pattern>
 	</servlet-mapping>
 
 	<security-constraint>
