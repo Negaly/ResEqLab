@@ -9,7 +9,6 @@
 <html>
 <head>
 <title>New Resource</title>
-<link rel="stylesheet" type="text/css" href="css/main.css" />
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <meta charset="utf-8">
 </head>
@@ -31,15 +30,15 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="index.html"><span class="glyphicon glyphicon-home">
+					<li><a href="/main"><span class="glyphicon glyphicon-home">
 						</span> Home</a></li>
-					<li><a href="/reservar" data-toggle="modal"
+					<li><a href="/reserve" data-toggle="modal"
 						data-target="#myModal"><span class="glyphicon glyphicon-tasks">
-						</span> Reservar</a></li>
+						</span> Reserve</a></li>
 					<c:choose>
 					<c:when	test="${user == 'admin@example.com'}">
 					<li><a href="/create"><span
-							class="glyphicon glyphicon-pencil"></span> Crear</a></li>
+							class="glyphicon glyphicon-pencil"></span> Create</a></li>
 									</c:when>
 					</c:choose>
 			
@@ -59,10 +58,18 @@
 		</div>
 		<!-- /.container-fluid -->
 	</nav>
-		<div class="headline">New resource</div>
+	
 
-		<form action="/new" method="post" accept-charset="utf-8">
-			<table>
+	<div style="width: 100%;">
+		<div class="line"></div>
+		<div class="topLine">
+			<h1 style="text-align: center">New resource</h1>
+			<div style="float: right;"></div>
+		</div>
+	</div>
+	
+	<form  action="/new" method="post" accept-charset="utf-8">
+			<table class="table" style="width: 60%;" align="center">
 				<tr>
 					<td><label for="title">Title</label></td>
 					<td><input type="text" name="title" id="title" size="65" /></td>

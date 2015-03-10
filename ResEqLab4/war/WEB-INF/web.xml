@@ -38,7 +38,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Reservar</servlet-name>
-		<url-pattern>/reservar</url-pattern>
+		<url-pattern>/reserve</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Reminder</servlet-name>
