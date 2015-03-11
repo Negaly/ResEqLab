@@ -45,7 +45,10 @@ public class MainServlet extends HttpServlet {
 		req.getSession().setAttribute("resources", new ArrayList<Resource>(resources));
 		req.getSession().setAttribute("url", url);
 		req.getSession().setAttribute("urlLinktext", urlLinktext);
-		
+//		List<Strint> list = resource
+//		for(int i=0; i<list.size();i++){
+//		System.out.println(list.get(i));
+//		}
 		RequestDispatcher view = req.getRequestDispatcher("ResourceApplication.jsp");
         view.forward(req, resp);
 		

@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import com.google.appengine.api.users.User;
+
 import es.upm.dit.isst.resource.model.Resource;
 
 public class ResourceDAOImpl implements ResourceDAO {
@@ -14,12 +16,11 @@ public class ResourceDAOImpl implements ResourceDAO {
 	private ResourceDAOImpl() {
 	}
 
-	public static ResourceDAOImpl getInstance(){
+	public static ResourceDAOImpl getInstance() {
 		if (instance == null)
 			instance = new ResourceDAOImpl();
 		return instance;
 	}
-
 
 	@Override
 	public List<Resource> listResources() {
@@ -44,10 +45,9 @@ public class ResourceDAOImpl implements ResourceDAO {
 	@Override
 	public List<Resource> getResources() {
 		EntityManager em = EMFService.get().createEntityManager();
-		Query q = em
-				.createQuery("select t from Resource t ");
+		Query q = em.createQuery("select t from Resource t ");
 		System.out.println(q.getResultList());
-		//q.setParameter("userId", userId);
+		// q.setParameter("userId", userId);
 		List<Resource> resources = q.getResultList();
 		return resources;
 	}
@@ -64,11 +64,25 @@ public class ResourceDAOImpl implements ResourceDAO {
 	}
 
 	@Override
-	public List<String> getUsers() {
+	public void addReserve(String reserve, long id, String user) {
 		EntityManager em = EMFService.get().createEntityManager();
-		Query q = em
-				.createQuery("select distinct t from Resource t");
-		List<String> users = q.getResultList();
-		return users;
+		try {
+			Resource resource = em.find(Resource.class, id);
+				if (resource.getReserves().contains(reserve)) {
+					System.out.println("Recurso ya reservado");
+
+				} else {
+					resource.setReserves(reserve);
+					em.merge(resource);
+					System.out.println("Reservo");
+
+				}
+			
+		} finally {
+			em.close();
+			System.out.println("LlegueFinally :)" +reserve);
+
+		}
 	}
+
 }

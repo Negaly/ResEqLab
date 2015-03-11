@@ -104,10 +104,19 @@
 				<td><c:out value="${resource.description}" /></td>
 				<c:if test="${user != null}">
 					<td>
-						<form action="/reserve" method="post" accept-charset="utf-8">
-							<input type="date">
-							<input type="text" list="mishoras">
-							<input type="submit" value="Reserve">
+						<form action="/reserve?id=${resource.id}&title=${resource.title}"
+							method="post" accept-charset="utf-8">
+							<div class="form-group">
+								
+								<div class="col-sm-5">
+									<div class="input-group date">
+										<input type="date" class="form-control" id="datepick"
+											name="date"> <span class="input-group-addon"><span
+											id="datepick" class="glyphicon glyphicon-calendar"></span> </span>
+									</div>
+								</div>
+								<input type="text" list="mishoras" name="mishoras"> <input type="submit"
+									value="Reserve">
 						</form>
 					</td>
 				</c:if>
@@ -116,7 +125,7 @@
 		</c:forEach>
 	</table>
 
-
+	</div>
 
 	<hr />
 

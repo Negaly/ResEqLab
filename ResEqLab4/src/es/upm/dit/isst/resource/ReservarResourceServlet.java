@@ -19,10 +19,10 @@ import es.upm.dit.isst.resource.dao.ResourceDAOImpl;
 import es.upm.dit.isst.resource.model.Resource;
 
 public class ReservarResourceServlet extends HttpServlet {
-  private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-  public void doGet(HttpServletRequest req, HttpServletResponse resp)
-  throws IOException, ServletException {
+	public void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws IOException, ServletException {
 		ResourceDAO dao = ResourceDAOImpl.getInstance();
 
 		UserService userService = UserServiceFactory.getUserService();
@@ -31,21 +31,52 @@ public class ReservarResourceServlet extends HttpServlet {
 		String url = userService.createLoginURL(req.getRequestURI());
 		String urlLinktext = "Login";
 		List<Resource> resources = new ArrayList<Resource>();
-		            
-		if (user != null){
-		//if (true){
+
+		if (user != null) {
+			// if (true){
 			System.out.println(user);
-		    url = userService.createLogoutURL(req.getRequestURI());
-		    urlLinktext = "Logout";
+			url = userService.createLogoutURL(req.getRequestURI());
+			urlLinktext = "Logout";
 		}
-	    resources = dao.getResources();
+		resources = dao.getResources();
 
 		req.getSession().setAttribute("user", user);
-		req.getSession().setAttribute("resources", new ArrayList<Resource>(resources));
+		req.getSession().setAttribute("resources",
+				new ArrayList<Resource>(resources));
 		req.getSession().setAttribute("url", url);
 		req.getSession().setAttribute("urlLinktext", urlLinktext);
-		
-		RequestDispatcher view = req.getRequestDispatcher("ResourceResApplication.jsp");
+
+		RequestDispatcher view = req
+				.getRequestDispatcher("ResourceResApplication.jsp");
 		view.forward(req, resp);
-} 
+	}
+	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+		
+		ResourceDAO dao = ResourceDAOImpl.getInstance();
+
+		UserService userService = UserServiceFactory.getUserService();
+		String user = userService.getCurrentUser().getUserId();
+
+
+		//		if (user != null) {
+//			// if (true){
+//			System.out.println(user);
+//			url = userService.createLogoutURL(req.getRequestURI());
+//			urlLinktext = "Logout";
+//		}
+		String id = req.getParameter("id");
+		String date = req.getParameter("date");
+		String hour = req.getParameter("mishoras");
+		String title = req.getParameter("title");
+		
+		String reserve = hour+"-"+date;
+		
+		
+		System.out.println("Reservando el recuerso: "+id+"\n"+title+"  durante "+reserve+"by: "+user);
+
+		dao.addReserve(reserve,Long.parseLong(id),user);
+		resp.sendRedirect("/main");
+
+	}
+	
 }

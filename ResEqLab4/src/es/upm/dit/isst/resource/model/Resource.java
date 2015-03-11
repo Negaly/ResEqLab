@@ -1,6 +1,7 @@
 package es.upm.dit.isst.resource.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,6 +18,7 @@ public class Resource implements Serializable {
 	private Long id;
 	private String title;
 	private String description;
+	private List<String> reserves; 
 	
 	public Resource(String title, String description) {
 		this.title = title;
@@ -42,6 +44,13 @@ public class Resource implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public List<String> getReserves() {
+		return reserves;
+	}
+	public void setReserves(String reserve) {
+		this.reserves.add(reserve);
 	}
 
 

@@ -25,6 +25,7 @@ public class ReminderServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		ResourceDAO dao = ResourceDAOImpl.getInstance();
+		/*
 		List<String> users = dao.getUsers();
 		for (String user : users) {
 			List<Resource> resources = dao.getResources();
@@ -49,6 +50,7 @@ public class ReminderServlet extends HttpServlet {
 				} catch(Exception e) {e.printStackTrace();}
 			}
 		}
+		*/
 	}
 
 	
