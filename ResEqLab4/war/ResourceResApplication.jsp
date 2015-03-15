@@ -12,20 +12,21 @@
 <head>
 <title>Resources</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
+
 <meta charset="utf-8">
 </head>
 <body>
 
 
 	<datalist id="mishoras">
-		<option label="08:00-09:00" value="8">
-		<option label="09:00-09:00" value="9">
-		<option label="10:00-09:00" value="10">
-		<option label="11:00-09:00" value="11">
-		<option label="12:00-09:00" value="12">
-		<option label="13:00-09:00" value="13">
-		<option label="14:00-09:00" value="14">
-		<option label="15:00-09:00" value="15">
+		<option label="08:00-09:00" value="8:00">
+		<option label="09:00-09:00" value="9:00">
+		<option label="10:00-09:00" value="10:00">
+		<option label="11:00-09:00" value="11:00">
+		<option label="12:00-09:00" value="12:00">
+		<option label="13:00-09:00" value="13:00">
+		<option label="14:00-09:00" value="14:00">
+		<option label="15:00-09:00" value="15:00">
 	</datalist>
 
 
@@ -107,31 +108,36 @@
 						<form action="/reserve?id=${resource.id}&title=${resource.title}"
 							method="post" accept-charset="utf-8">
 							<div class="form-group">
-								
+
 								<div class="col-sm-5">
 									<div class="input-group date">
-										<input type="date" class="form-control" id="datepick"
-											name="date"> <span class="input-group-addon"><span
-											id="datepick" class="glyphicon glyphicon-calendar"></span> </span>
+										<span class="input-group-addon"><span id="datepick"
+											class="glyphicon glyphicon-calendar"></span> </span> <input
+											type="date" class="form-control" id="datepick" name="date">
 									</div>
 								</div>
-								<input type="text" list="mishoras" name="mishoras"> <input type="submit"
-									value="Reserve">
+								<div class="col-sm-5">
+									<div class="input-group time">
+										<span class="input-group-addon"><span id="datepick"
+											class="glyphicon glyphicon-time" ></span> </span> <input type="text"
+											class="form-control" id="mishoras" list="mishoras"
+											name="mishoras">
+									</div>
+								</div>
+								
+                					<input type="submit" class="btn btn-success" value="Reserve">
+                			
 						</form>
 					</td>
 				</c:if>
-
+		
 			</tr>
 		</c:forEach>
 	</table>
 
-	</div>
-
 	<hr />
 
-
-
-
+	 
 
 
 	<footer>
@@ -141,6 +147,8 @@
 			Resources.
 		</h6>
 	</footer>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	
 </body>
 </html>

@@ -70,6 +70,7 @@ public class ResourceDAOImpl implements ResourceDAO {
 			Resource resource = em.find(Resource.class, id);
 				if (resource.getReserves().contains(reserve)) {
 					System.out.println("Recurso ya reservado");
+					
 
 				} else {
 					resource.setReserves(reserve);

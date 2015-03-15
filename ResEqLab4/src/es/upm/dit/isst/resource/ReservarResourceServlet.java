@@ -74,8 +74,15 @@ public class ReservarResourceServlet extends HttpServlet {
 		
 		System.out.println("Reservando el recuerso: "+id+"\n"+title+"  durante "+reserve+"by: "+user);
 
-		dao.addReserve(reserve,Long.parseLong(id),user);
-		resp.sendRedirect("/main");
+		try{
+			dao.addReserve(reserve,Long.parseLong(id),user);
+			resp.sendRedirect("/main");
+			
+		}
+		finally{
+			resp.sendRedirect("/reserve");
+		}
+		
 
 	}
 	
