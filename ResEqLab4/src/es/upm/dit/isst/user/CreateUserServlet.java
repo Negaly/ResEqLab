@@ -20,7 +20,7 @@ public class CreateUserServlet extends HttpServlet{
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-		System.out.println("Creating new User ");
+		System.out.println("Adding atributes for GoogleUser ");
 		/*User user = (User) req.getAttribute("user");
 		if (user == null) {
 			UserService userService = UserServiceFactory.getUserService();
