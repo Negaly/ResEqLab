@@ -10,6 +10,7 @@
 <head>
 <title>New Resource</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <meta charset="utf-8">
 </head>
 <body>

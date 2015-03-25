@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import es.upm.dit.isst.resource.model.Resource;
+
 @Entity
 public class Reserve implements Serializable {
 
@@ -19,16 +21,17 @@ public class Reserve implements Serializable {
 	private String startdate;
 	private String enddate;
 	private String user;
+	private long resource;
 	
 
 	public Reserve(String starthour, String endhour, String startdate,
-			String enddate, String user) {
+			String enddate, String user, long resource) {
 		this.starthour = starthour;
 		this.endhour = endhour;
 		this.startdate = startdate;
 		this.enddate = enddate;
 		this.user = user;
-
+		this.resource = resource;
 	}
 
 	public Long getId() {
@@ -73,6 +76,13 @@ public class Reserve implements Serializable {
 
 	public void setUser(String user) {
 		this.user = user;
+	}
+	
+	public long getResource(){
+		return resource;
+	}
+	public void setResource(long resource){
+		this.resource = resource;
 	}
 
 }

@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import es.upm.dit.isst.reserve.model.Reserve;
+
 @Entity
 public class Resource implements Serializable {
 
@@ -18,7 +20,7 @@ public class Resource implements Serializable {
 	private Long id;
 	private String title;
 	private String description;
-	private List<String> reserves; 
+	private List<Long> reserves; 
 	
 	public Resource(String title, String description) {
 		this.title = title;
@@ -46,10 +48,10 @@ public class Resource implements Serializable {
 		this.description = description;
 	}
 
-	public List<String> getReserves() {
+	public List<Long> getReserves() {
 		return reserves;
 	}
-	public void setReserves(String reserve) {
+	public void addReserve(Long reserve) {
 		this.reserves.add(reserve);
 	}
 

@@ -7,6 +7,7 @@ import javax.persistence.Query;
 
 import com.google.appengine.api.users.User;
 
+import es.upm.dit.isst.reserve.model.Reserve;
 import es.upm.dit.isst.resource.model.Resource;
 
 public class ResourceDAOImpl implements ResourceDAO {
@@ -64,16 +65,16 @@ public class ResourceDAOImpl implements ResourceDAO {
 	}
 
 	@Override
-	public void addReserve(String reserve, long id, String user) {
+	public void addReserve(long id, String user) {
 		EntityManager em = EMFService.get().createEntityManager();
 		try {
 			Resource resource = em.find(Resource.class, id);
-				if (resource.getReserves().contains(reserve)) {
+				if (resource.getReserves().contains(id)) {
 					System.out.println("Recurso ya reservado");
 					
 
 				} else {
-					resource.setReserves(reserve);
+					resource.addReserve(id);
 					em.merge(resource);
 					System.out.println("Reservo");
 
@@ -81,7 +82,7 @@ public class ResourceDAOImpl implements ResourceDAO {
 			
 		} finally {
 			em.close();
-			System.out.println("LlegueFinally :)" +reserve);
+			System.out.println("LlegueFinally :)" +id);
 
 		}
 	}

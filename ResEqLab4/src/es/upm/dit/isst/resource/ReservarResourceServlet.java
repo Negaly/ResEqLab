@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +15,10 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
+import es.upm.dit.isst.reserve.dao.ReserveDAO;
+import es.upm.dit.isst.reserve.dao.ReserveDAOImpl;
+import es.upm.dit.isst.reserve.model.Reserve;
+import es.upm.dit.isst.resource.dao.EMFService;
 import es.upm.dit.isst.resource.dao.ResourceDAO;
 import es.upm.dit.isst.resource.dao.ResourceDAOImpl;
 import es.upm.dit.isst.resource.model.Resource;
@@ -52,7 +57,8 @@ public class ReservarResourceServlet extends HttpServlet {
 	}
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException{
 		
-		ResourceDAO dao = ResourceDAOImpl.getInstance();
+		ResourceDAO daoresource = ResourceDAOImpl.getInstance();
+		ReserveDAO daoreserve = ReserveDAOImpl.getInstance();
 
 		UserService userService = UserServiceFactory.getUserService();
 		String user = userService.getCurrentUser().getUserId();
@@ -68,14 +74,13 @@ public class ReservarResourceServlet extends HttpServlet {
 		String date = req.getParameter("date");
 		String hour = req.getParameter("mishoras");
 		String title = req.getParameter("title");
+		EntityManager em = EMFService.get().createEntityManager();
+		Resource resource = em.find(Resource.class, Long.parseLong(id));
+		//falta definir tiempo de sesion
+		daoreserve.add(hour,hour,date,date,user,Long.parseLong(id));
 		
-		String reserve = hour+"-"+date;
-		
-		
-		System.out.println("Reservando el recuerso: "+id+"\n"+title+"  durante "+reserve+"by: "+user);
-
 		try{
-			dao.addReserve(reserve,Long.parseLong(id),user);
+			daoresource.addReserve(Long.parseLong(id),user);
 			resp.sendRedirect("/main");
 			
 		}
