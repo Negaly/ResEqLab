@@ -80,11 +80,10 @@ public class ReservarResourceServlet extends HttpServlet {
 		String title = req.getParameter("title");
 		String endhour = starthour;
 
-
 		EntityManager em = EMFService.get().createEntityManager();
 		Resource resource = em.find(Resource.class, Long.parseLong(id));
 		// Cambiamos de string al formato de Calendar
-		String enddate=startdate;
+		String enddate = startdate;
 		int Syear = Integer.parseInt(startdate.split("-")[0]);
 		int Smonth = Integer.parseInt(startdate.split("-")[1]);
 		int Sday = Integer.parseInt(startdate.split("-")[2]);
@@ -97,65 +96,19 @@ public class ReservarResourceServlet extends HttpServlet {
 		int Ehour = Integer.parseInt(endhour.split(":")[0]);
 		int Emin = Integer.parseInt(endhour.split(":")[1]);
 
+		Calendar start = new GregorianCalendar(Syear, Smonth, Sday, Shour, Smin);
+		Calendar end = new GregorianCalendar(Eyear, Emonth, Eday, Ehour, Emin);
 
-		
-		
-		Calendar start = new GregorianCalendar(Syear,Smonth,Sday,Shour,Smin);
-		Calendar end = new GregorianCalendar(Eyear,Emonth,Eday,Ehour,Emin);
-
-		
-		
 		// COMPROBAMOS QUE EL RECURSO NO ESTA OCUPADO EN ESE MOMENTO
 		ReserveDAO reservedao = ReserveDAOImpl.getInstance();
 		List<Reserve> reserves = new ArrayList<Reserve>();
 		reserves = reservedao.getReserves();
 
 		for (Reserve reserve : reserves) {
-//			if (reserve.getResource() == Long.parseLong(id)) {
-//				// Integer.parseInt(enteroString)
-//				// solo compruebo con las reservas del mismo recurso
-//				if (startdateparsed != enddateparsed) {
-//					//solo compruebo incompatibilidad de dias si, dura mas de un dia
-//					if (reserve.getStartdate().before(startdateparsed)) {
-//						// otra antes mia -> pregunto -> sufin despues mia?
-//						if (reserve.getEnddate().after(startdateparsed)) {
-//							System.out.println("Ya reservado no hacer reserva");
-//						}
-//					}
-//					// Compruebo el otro sentido
-//					if (reserve.getStartdate().after(startdateparsed)) {
-//						// suini despues miini -> pregunto -> suinicio antes
-//						// mifin
-//						if (reserve.getStartdate().before(enddateparsed)) {
-//							System.out.println("Ya reservado no hacer reserva");
-//						}
-//					}
-//				}
-//				
-//				// Faltan hacer las comparaciones cuando coinciden, fuera de los
-//				// ifs para los start dentro de los ifs para los ends.
-//				
-//				if (reserve.getStartdate() == startdateparsed) {
-//					// suini igual miini -> pregunto -> horas?
-//					if (reserve.getStarthour() < starthourint) {
-//						if (reserve.getEndhour() > starthourint) {
-//							System.out.println("Ya reservado no hacer reserva");
-//						}
-//					}
-//					if (reserve.getStarthour() > starthourint) {
-//						if (reserve.getStarthour() < endhourint) {
-//							System.out.println("Ya reservado no hacer reserva");
-//						}
-//					}
-//					if (reserve.getStarthour() == starthourint) {
-//						System.out.println("Ya reservado no hacer reserva");
-//					}
-//				}
-//			}
 		}
 
 		// falta definir tiempo de sesion
-		daoreserve.add(start,end, user, Long.parseLong(id));
+		daoreserve.add(start, end, user, Long.parseLong(id));
 
 		try {
 			daoresource.addReserve(Long.parseLong(id), user);// la id que metes

@@ -36,14 +36,24 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>Reservar</servlet-name>
 		<servlet-class>es.upm.dit.isst.resource.ReservarResourceServlet</servlet-class>
 	</servlet>
-		<servlet>
+	<servlet>
 		<servlet-name>ListReserves</servlet-name>
 		<servlet-class>es.upm.dit.isst.reserve.ListReserveServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>ModifyReserve</servlet-name>
+		<servlet-class>es.upm.dit.isst.reserve.ModifyReserveServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ModifyReserve</servlet-name>
+		<url-pattern>/modifyReserve</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>ListReserves</servlet-name>
 		<url-pattern>/listReserves</url-pattern>
 	</servlet-mapping>
+
 	<servlet-mapping>
 		<servlet-name>Reservar</servlet-name>
 		<url-pattern>/reserve</url-pattern>

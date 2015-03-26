@@ -12,6 +12,7 @@ import com.google.appengine.api.users.User;
 import es.upm.dit.isst.reserve.model.Reserve;
 import es.upm.dit.isst.resource.model.Resource;
 
+
 public class ReserveDAOImpl implements ReserveDAO {
 
 	private static ReserveDAOImpl instance;
@@ -64,6 +65,50 @@ public class ReserveDAOImpl implements ReserveDAO {
 			em.remove(reserve);
 		} finally {
 			em.close();
+		}
+	}
+
+	@Override
+	public List<Reserve> getReserves(String userId) {
+
+		EntityManager em = EMFService.get().createEntityManager();
+		Query q = em
+				.createQuery("select t from Reserve t where t.user = :userId");
+		System.out.println(q);
+		q.setParameter("userId", userId);
+		List<Reserve> reserves = q.getResultList();
+		return reserves;
+	}
+
+	@Override
+	public Reserve getReserve(long id) {
+		EntityManager em = EMFService.get().createEntityManager();
+		try {
+			Reserve reserve = em.find(Reserve.class, id);
+			return reserve;
+		} finally {
+			em.close();
+		}
+	}
+
+	@Override
+	public void update(long id,Calendar start, Calendar end) {
+		EntityManager em = EMFService.get().createEntityManager();
+		Reserve newReserve = null;
+		try {
+			Reserve reserve = em.find(Reserve.class, id);
+			String user= reserve.getUser();
+			long resource = reserve.getResource();
+			em.remove(reserve);
+			newReserve = new Reserve(start,end,user,resource);
+			
+
+		} finally {
+			em.close();
+			EntityManager am = EMFService.get().createEntityManager();
+			am.persist(newReserve);
+			am.close();
+
 		}
 	}
 
