@@ -18,19 +18,6 @@
 <body>
 
 
-	<datalist id="mishoras">
-		<option label="08:00-09:00" value="8:00">
-		<option label="09:00-09:00" value="9:00">
-		<option label="10:00-09:00" value="10:00">
-		<option label="11:00-09:00" value="11:00">
-		<option label="12:00-09:00" value="12:00">
-		<option label="13:00-09:00" value="13:00">
-		<option label="14:00-09:00" value="14:00">
-		<option label="15:00-09:00" value="15:00">
-	</datalist>
-
-
-
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -50,13 +37,14 @@
 				<ul class="nav navbar-nav">
 					<li><a href="/main"><span class="glyphicon glyphicon-home">
 						</span> Home</a></li>
-					<li><a href="/reserve" data-toggle="modal"
-						data-target="#myModal"><span class="glyphicon glyphicon-tasks">
+					<li><a href="/reserve"><span class="glyphicon glyphicon-tasks">
 						</span> Reserve</a></li>
 					<c:choose>
-						<c:when test="${user == 'admin@example.com'}">
+						<c:when test="${userAdmin}">
 							<li><a href="/create"><span
 									class="glyphicon glyphicon-pencil"></span> Create</a></li>
+							<li><a href="/listReserves"><span
+									class="glyphicon glyphicon-tasks"></span> Reserves</a></li>
 						</c:when>
 					</c:choose>
 
@@ -88,7 +76,7 @@
 
 
 
-	<table class="table" style="width: 60%;" align="center">
+	<table class="table" style="width: 100%;" align="center">
 		<tr>
 			<th>Title</th>
 			<th>Description</th>
@@ -119,25 +107,23 @@
 								<div class="col-sm-5">
 									<div class="input-group time">
 										<span class="input-group-addon"><span id="datepick"
-											class="glyphicon glyphicon-time" ></span> </span> <input type="text"
-											class="form-control" id="mishoras" list="mishoras"
-											name="mishoras">
+											class="glyphicon glyphicon-time"></span> </span> <input type="time"
+											class="form-control" id="mishoras" name="mishoras">
 									</div>
 								</div>
-								
-                					<input type="submit" class="btn btn-success" value="Reserve">
-                			
+
+								<input type="submit" class="btn btn-success" value="Reserve">
 						</form>
 					</td>
 				</c:if>
-		
+
 			</tr>
 		</c:forEach>
 	</table>
 
 	<hr />
 
-	 
+
 
 
 	<footer>
@@ -147,8 +133,9 @@
 			Resources.
 		</h6>
 	</footer>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	
+
 </body>
 </html>

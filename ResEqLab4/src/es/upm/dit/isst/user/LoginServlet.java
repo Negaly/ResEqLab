@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
 	            
 	            //if(){
 	                System.out.println("Let's go");
-	                response.sendRedirect("/reservar");
+	                response.sendRedirect("/reserve");
 	            //}else{
 	               // System.out.println("Error en pass/user");
 	                //response.sendRedirect("");

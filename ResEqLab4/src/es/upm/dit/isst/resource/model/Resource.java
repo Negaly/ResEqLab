@@ -8,8 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import es.upm.dit.isst.reserve.model.Reserve;
-
 @Entity
 public class Resource implements Serializable {
 

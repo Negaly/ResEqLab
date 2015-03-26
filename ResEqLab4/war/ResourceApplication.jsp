@@ -10,7 +10,7 @@
 
 <html>
 <head>
-<title>Resources</title>
+<title>Reserves</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <meta charset="utf-8">
 </head>
@@ -32,15 +32,16 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="/main"><span
-							class="glyphicon glyphicon-home"> </span> Home</a></li>
-					<li><a href="/reserve" data-toggle="modal"
-						data-target="#myModal"><span class="glyphicon glyphicon-tasks">
-						</span> Reserve</a></li>
+					<li><a href="/main"><span class="glyphicon glyphicon-home">
+						</span> Home</a></li>
+					<li><a href="/reserve"><span
+							class="glyphicon glyphicon-tasks"> </span> Reserve</a></li>
 					<c:choose>
-						<c:when test="${user == 'admin@example.com'}">
+						<c:when test="${userAdmin}">
 							<li><a href="/create"><span
 									class="glyphicon glyphicon-pencil"></span> Create</a></li>
+							<li><a href="/listReserves"><span
+									class="glyphicon glyphicon-tasks"></span> Reserves</a></li>
 						</c:when>
 					</c:choose>
 
@@ -65,8 +66,7 @@
 	<div style="width: 100%;">
 		<div class="line"></div>
 		<div class="topLine">
-			<h1 style="text-align: center">
-				Resources</h1>
+			<h1 style="text-align: center">Resources</h1>
 			<div style="float: right;"></div>
 		</div>
 	</div>
@@ -78,7 +78,7 @@
 			<th>Title</th>
 			<th>Description</th>
 			<c:choose>
-				<c:when test="${user == 'admin@example.com'}">
+				<c:when test="${userAdmin}">
 					<th>Action</th>
 				</c:when>
 			</c:choose>
@@ -89,7 +89,7 @@
 				<td><c:out value="${resource.title}" /></td>
 				<td><c:out value="${resource.description}" /></td>
 				<c:choose>
-					<c:when test="${user == 'admin@example.com'}">
+					<c:when test="${userAdmin}">
 						<td><a class="done"
 							href="<c:url value="/remove?id=${resource.id}" />">Remove</a></td>
 					</c:when>
@@ -99,18 +99,19 @@
 		</c:forEach>
 	</table>
 
-	
-	
+
+
 	<hr />
-	
+
 	<footer>
-	<h6 small>
-	You have a total number of
-	<c:out value="${fn:length(resources)}" />
-	Resources.
-	</h6>
+		<h6 small>
+			You have a total number of
+			<c:out value="${fn:length(resources)}" />
+			Resources.
+		</h6>
 	</footer>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 </body>
 </html>

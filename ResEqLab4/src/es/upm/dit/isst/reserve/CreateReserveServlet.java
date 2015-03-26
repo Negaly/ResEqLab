@@ -28,14 +28,7 @@ public class CreateReserveServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		System.out.println("Creating new Reserve ");
-		/*User user = (User) req.getAttribute("user");
-		if (user == null) {
-			UserService userService = UserServiceFactory.getUserService();
-			user = userService.getCurrentUser();
-		}
-		*/
-	//	String title = checkNull(req.getParameter("title"));
-	//	String Description = checkNull(req.getParameter("description"));
+
 		String id = req.getParameter("id");
 		String startdate = req.getParameter("date");
 		String starthour = req.getParameter("mishoras");

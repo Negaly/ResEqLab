@@ -44,6 +44,7 @@ public class CreateUserServlet extends HttpServlet{
 		}
 		return s;
 	}
+	
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
 		UserDAO dao = UserDAOImpl.getInstance();

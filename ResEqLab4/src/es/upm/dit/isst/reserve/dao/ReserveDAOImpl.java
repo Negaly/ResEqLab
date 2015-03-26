@@ -1,5 +1,7 @@
 package es.upm.dit.isst.reserve.dao;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -23,36 +25,36 @@ public class ReserveDAOImpl implements ReserveDAO {
 		return instance;
 	}
 
-	//@Override
-//	public List<Reserve> listReserves() {
-//		EntityManager em = EMFService.get().createEntityManager();
-//		// read the existing entries
-//		Query q = em.createQuery("select m from Reserves m");
-//		List<Reserve> reserves = q.getResultList();
-//		return reserves;
-//	}
+	@Override
+	public List<Reserve> listReserves() {
+		EntityManager em = EMFService.get().createEntityManager();
+		// read the existing entries
+		Query q = em.createQuery("select m from Reserve m");
+		List<Reserve> reserves = q.getResultList();
+		return reserves;
+	}
 
 	@Override
-	public void add(String starthour, String endhour, String startdate, String enddate, String user, long resource) {
+	public void add(Calendar start, Calendar end, String user, long resource) {
 		synchronized (this) {
 			EntityManager em = EMFService.get().createEntityManager();
-			
-			Reserve reserve = new Reserve(starthour, endhour, startdate, enddate, user, resource);
+
+			Reserve reserve = new Reserve(start, end, user, resource);
 			em.persist(reserve);
 			em.close();
 		}
 
 	}
-//
-//	@Override
-//	public List<Reserve> getReserves() {
-//		EntityManager em = EMFService.get().createEntityManager();
-//		Query q = em.createQuery("select t from Reserve t ");
-//		System.out.println(q.getResultList());
-//		// q.setParameter("userId", userId);
-//		List<Reserve> reserves = q.getResultList();
-//		return reserves;
-//	}
+
+	@Override
+	public List<Reserve> getReserves() {
+		EntityManager em = EMFService.get().createEntityManager();
+		Query q = em.createQuery("select t from Reserve t ");
+		System.out.println(q.getResultList());
+		// q.setParameter("userId", userId);
+		List<Reserve> reserves = q.getResultList();
+		return reserves;
+	}
 
 	@Override
 	public void remove(long id) {
@@ -64,9 +66,5 @@ public class ReserveDAOImpl implements ReserveDAO {
 			em.close();
 		}
 	}
-
-	
-
-
 
 }
