@@ -99,4 +99,17 @@ public class ResourceDAOImpl implements ResourceDAO {
 		}
 	}
 
+	@Override
+	public void modifyResource(long resourceId, String title, String description) {
+		EntityManager em = EMFService.get().createEntityManager();
+		try {
+			Resource resource = em.find(Resource.class, resourceId);
+			resource.setTitle(title);
+			resource.setDescription(description);
+			em.merge(resource);
+		} finally {
+			em.close();
+		}
+	}
+
 }
