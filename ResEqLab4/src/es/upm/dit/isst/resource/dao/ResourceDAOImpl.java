@@ -7,6 +7,7 @@ import javax.persistence.Query;
 
 import com.google.appengine.api.users.User;
 
+import es.upm.dit.isst.reserve.dao.EMFService;
 import es.upm.dit.isst.reserve.model.Reserve;
 import es.upm.dit.isst.resource.model.Resource;
 
@@ -84,6 +85,17 @@ public class ResourceDAOImpl implements ResourceDAO {
 			em.close();
 			System.out.println("LlegueFinally :)" +id);
 
+		}
+	}
+
+	@Override
+	public Resource getResource(long resourceId) {
+		EntityManager em = EMFService.get().createEntityManager();
+		try {
+			Resource resource = em.find(Resource.class, resourceId);
+			return resource;
+		} finally {
+			em.close();
 		}
 	}
 

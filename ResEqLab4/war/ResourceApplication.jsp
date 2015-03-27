@@ -94,6 +94,8 @@
 					<c:when test="${userAdmin}">
 						<td><a class="done"
 							href="<c:url value="/remove?id=${resource.id}" />">Remove</a></td>
+					<td><a class="done"
+							href="<c:url value="/modifyResource?resourceId=${resource.id}" />">Modify</a></td>
 					</c:when>
 				</c:choose>
 
