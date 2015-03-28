@@ -71,15 +71,16 @@
 		</div>
 	</div>
 
+	
 
-
-	<table class="table" style="width: 60%;" align="center">
+	<table class="table table-striped" style="width: 60%;" align="center">
 		<tr>
 			<th>Title</th>
 			<th>Description</th>
 			<c:choose>
 				<c:when test="${userAdmin}">
 					<th>Action</th>
+					<th></th>
 				</c:when>
 			</c:choose>
 		</tr>
@@ -90,9 +91,9 @@
 				<td><c:out value="${resource.description}" /></td>
 				<c:choose>
 					<c:when test="${userAdmin}">
-						<td><a class="done"
+						<td><a class="btn btn-danger"
 							href="<c:url value="/remove?id=${resource.id}" />">Remove</a></td>
-					<td><a class="done"
+					<td><a class="btn btn-warning"
 							href="<c:url value="/modifyResource?resourceId=${resource.id}" />">Modify</a></td>
 					</c:when>
 				</c:choose>

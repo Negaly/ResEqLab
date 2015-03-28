@@ -70,9 +70,9 @@
 		</div>
 	</div>
 
+	<div class="container">
 
-
-	<table class="table" style="width: 100%;" align="center">
+	<table class="table table-striped" align="center">
 		<tr>
 			<th>Start Date</th>
 			<th>End Date</th>
@@ -94,9 +94,9 @@
 
 				<c:choose>
 					<c:when test="${user!=null}">
-						<td><a class="done"
-							href="<c:url value="/removeReserve?ReserveId=${reserve.id}" />">Remove</a></td>
-						<td><a class="done"
+						<td><a class="btn btn-danger"
+							href="<c:url value="/removeReserve?ReserveId=${reserve.id}" />">Remove</a>
+						<a class="btn btn-warning"
 							href="<c:url value="/modifyReserve?reserveId=${reserve.id}" />">Modify</a></td>
 					</c:when>
 				</c:choose>
@@ -105,7 +105,7 @@
 		</c:forEach>
 	</table>
 
-
+	</div>
 
 	<hr />
 

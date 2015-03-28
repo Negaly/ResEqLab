@@ -74,9 +74,10 @@
 		</div>
 	</div>
 
+	<div class="container">
 
-
-	<table class="table" style="width: 100%;" align="center">
+	<table class="table table-striped"  align="center">
+	<thead>
 		<tr>
 			<th>Title</th>
 			<th>Description</th>
@@ -86,7 +87,8 @@
 				</c:when>
 			</c:choose>
 		</tr>
-
+	</thead>
+	<tbody>
 		<c:forEach items="${resources}" var="resource">
 			<c:choose>
 				<c:when test="${resource.available}">
@@ -100,14 +102,16 @@
 									method="post" accept-charset="utf-8">
 									<div class="form-group">
 
-										<div class="col-sm-5">
+										<div class="col-lg-3">
 											<div class="input-group date">
 												<span class="input-group-addon"><span id="datepick"
 													class="glyphicon glyphicon-calendar"></span> </span> <input
 													type="date" class="form-control" id="datepick" name="date">
 											</div>
 										</div>
-										<div class="col-sm-5">
+									</div>
+									<div class="form-group">
+										<div class="col-lg-3">
 											<div class="input-group time">
 												<span class="input-group-addon"><span id="datepick"
 													class="glyphicon glyphicon-time"></span> </span> <input
@@ -115,11 +119,18 @@
 													name="mishoras">
 											</div>
 										</div>
-										<div>
-											<input type="number" name="sessionTime" id="sessionTime"
+									</div>
+									<div class="form-group">
+										<div class="col-lg-3">
+											<input placeholder="Enter your session time" type="number" class="form-control" name="sessionTime" id="sessionTime"
 												min="1" max="${resource.sessionTime}">
 										</div>
-										<input type="submit" class="btn btn-success" value="Reserve">
+									</div>
+									<div class="form-group">
+										<div class="col-lg-3">	
+										<input type="submit" class="btn btn-primary" value="Reserve">
+										</div>
+									</div>
 								</form>
 							</td>
 						</c:if>
@@ -128,10 +139,12 @@
 				</c:when>
 			</c:choose>
 		</c:forEach>
+		</tbody>
 	</table>
 
-	<hr />
+	
 
+	</div>
 
 
 
