@@ -50,7 +50,7 @@
 
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li class="active"><a href="/login.jsp"> <c:choose>
+					<li class="active"><a href="<c:url value="${url}"/>"> <c:choose>
 								<c:when test="${user != null}">
 									<span class="glyphicon glyphicon-off"> </span>
 								</c:when>
@@ -100,13 +100,13 @@
 								</div>
 							</div>
 							<div class="col-sm-2">
-							<div class="input-group time">
-							<span class="input-group-addon"><span id="datepick"
-										class="glyphicon glyphicon-time"></span> </span>
-								<input type="number" name="sessionTime" id="sessionTime" min="1"
-									max="${resource.sessionTime}" class="form-control">
-							</div>
-							<input type="submit" class="btn btn-success" value="Reserve">
+								<div class="input-group time">
+									<span class="input-group-addon"><span id="datepick"
+										class="glyphicon glyphicon-time"></span> </span> <input type="number"
+										name="sessionTime" id="sessionTime" min="1"
+										max="${resource.sessionTime}" class="form-control">
+								</div>
+								<input type="submit" class="btn btn-success" value="Reserve">
 					</form>
 				</td>
 			</c:if>

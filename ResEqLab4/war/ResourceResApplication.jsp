@@ -50,7 +50,7 @@
 
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li class="active"><a href="/login.jsp"> <c:choose>
+					<li class="active"><a href="<c:url value="${url}"/>"> <c:choose>
 								<c:when test="${user != null}">
 									<span class="glyphicon glyphicon-off"> </span>
 								</c:when>

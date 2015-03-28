@@ -41,10 +41,9 @@
 							<li><a href="/create"><span
 									class="glyphicon glyphicon-pencil"></span> Create</a></li>
 							<li><a href="/listReserves"><span
-									class="glyphicon glyphicon-pencil"></span> Reserves</a></li>
+									class="glyphicon glyphicon-tasks"></span> Reserves</a></li>
 						</c:when>
 					</c:choose>
-
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li class="active"><a href="<c:url value="${url}"/>"> <c:choose>

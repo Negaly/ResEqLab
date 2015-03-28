@@ -37,13 +37,11 @@
 					<li><a href="/reserve"><span
 							class="glyphicon glyphicon-tasks"> </span> Reserve</a></li>
 					<c:choose>
-						<c:when test="${user != null}">
-							<li><a href="/listReserves"><span
-									class="glyphicon glyphicon-tasks"></span> Reserves</a></li>
-						</c:when>
 						<c:when test="${userAdmin}">
 							<li><a href="/create"><span
 									class="glyphicon glyphicon-pencil"></span> Create</a></li>
+							<li><a href="/listReserves"><span
+									class="glyphicon glyphicon-tasks"></span> Reserves</a></li>
 						</c:when>
 					</c:choose>
 
