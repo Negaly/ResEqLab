@@ -52,7 +52,7 @@ public class ListReserveServlet extends HttpServlet {
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
 
-		String url = userService.createLoginURL(req.getRequestURI());
+		String url = userService.createLoginURL("/createUser");
 		String urlLinktext = "Login";
 		List<Reserve> reserves = null;
 		boolean userAdmin = false;

@@ -122,7 +122,7 @@ public class ModifyReserveServlet extends HttpServlet {
 		
 		req.getSession().setAttribute("userAdmin", userAdmin);
 
-		String url = userService.createLoginURL(req.getRequestURI());
+		String url = userService.createLoginURL("/createUser");
 		String urlLinktext = "Login";
 		if (user != null) {
 			url = userService.createLogoutURL(req.getRequestURI());

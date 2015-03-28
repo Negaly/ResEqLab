@@ -49,7 +49,12 @@ public class CreateResourceServlet extends HttpServlet {
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
 
-		String url = userService.createLoginURL(req.getRequestURI());
+		//String url = userService.createLoginURL(req.getRequestURI());
+		String url = userService.createLoginURL("/createUser");
+		System.out.println("URL: "+url);
+		System.out.println("RequestURI: "+req.getRequestURI());
+
+
 		String urlLinktext = "Login";
 		List<Resource> resources = new ArrayList<Resource>();
 		boolean userAdmin= false;
@@ -58,10 +63,10 @@ public class CreateResourceServlet extends HttpServlet {
 		}
 	    req.getSession().setAttribute("userAdmin", userAdmin);     
 		if (user != null){
-		//if (true){
 			System.out.println(user);
 		    url = userService.createLogoutURL(req.getRequestURI());
 		    urlLinktext = "Logout";
+			System.out.println("URL: "+url);
 		}
 	    resources = dao.getResources();
 

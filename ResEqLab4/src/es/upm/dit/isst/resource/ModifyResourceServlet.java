@@ -46,7 +46,7 @@ public class ModifyResourceServlet extends HttpServlet {
 		}
 		req.getSession().setAttribute("userAdmin", userAdmin);
 
-		String url = userService.createLoginURL(req.getRequestURI());
+		String url = userService.createLoginURL("/createUser");
 		String urlLinktext = "Login";
 
 		if (user != null) {
@@ -82,7 +82,6 @@ public class ModifyResourceServlet extends HttpServlet {
 		String resourceId = req.getParameter("resourceId");
 		String title = checkNull(req.getParameter("title"));
 		String description = checkNull(req.getParameter("description"));
-		// String availableString = req.getParameter("available");
 		String availableString = req.getParameter("available");
 		int sessionTime = Integer.parseInt(req.getParameter("sessionTime"));
 		System.out.println("availableStringeq: "+availableString);

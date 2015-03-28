@@ -43,7 +43,7 @@ public class ReservarResourceServlet extends HttpServlet {
 		}
 		req.getSession().setAttribute("userAdmin", userAdmin);
 
-		String url = userService.createLoginURL(req.getRequestURI());
+		String url = userService.createLoginURL("/createUser");
 		String urlLinktext = "Login";
 		List<Resource> resources = new ArrayList<Resource>();
 
