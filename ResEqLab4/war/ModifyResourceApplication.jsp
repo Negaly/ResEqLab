@@ -71,18 +71,25 @@
 		</div>
 	</div>
 
-	<form action="/modifyResource?resourceId=${resourceId}" method="post" accept-charset="utf-8">
+	<form action="/modifyResource?resourceId=${resourceId}" method="post"
+		accept-charset="utf-8">
 		<table class="table" style="width: 80%;" align="center">
 			<tr>
 				<td><label for="title">Title</label></td>
-				<td><input type="text" name="title" id="title" size="65" value="${title}" /></td>
+				<td><input type="text" name="title" id="title" size="65"
+					value="${title}" /></td>
 			</tr>
 			<tr>
 				<td valign="description"><label for="description">Description</label></td>
 				<td><textarea rows="4" cols="50" name="description"
 						id="description">${description}</textarea></td>
 			</tr>
-
+			<tr>
+				<td valign="sessionTime"><label for="sessionTime">Session
+						Time</label></td>
+				<td><input type="number" name="sessionTime" id="sessionTime"
+					min="1" max="5"></td>
+			</tr>
 			<tr>
 				<td colspan="2" align="right"><input type="submit"
 					value="Modify" /></td>

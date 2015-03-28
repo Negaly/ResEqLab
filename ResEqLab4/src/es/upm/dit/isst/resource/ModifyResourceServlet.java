@@ -84,11 +84,12 @@ public class ModifyResourceServlet extends HttpServlet {
 		System.out.println(resourceId);
 		String title = checkNull(req.getParameter("title"));
 		String description = checkNull(req.getParameter("description"));
+		int sessionTime = Integer.parseInt(req.getParameter("sessionTime"));
 
 
 		try {
 			daoresource.modifyResource(Long.parseLong(resourceId), title,
-					description);
+					description,sessionTime);
 			resp.sendRedirect("/main");
 
 		} finally {
