@@ -20,11 +20,13 @@ public class Resource implements Serializable {
 	private String description;
 	private int sessionTime;
 	private List<Long> reserves; 
+	private boolean available;
 	
 	public Resource(String title, String description,int sessionTime) {
 		this.title = title;
 		this.description = description;		
 		this.sessionTime = sessionTime;
+		this.setAvailable(true);
 	}
 
 	public Long getId() {
@@ -60,6 +62,14 @@ public class Resource implements Serializable {
 
 	public void setSessionTime(int sessionTime) {
 		this.sessionTime = sessionTime;
+	}
+
+	public boolean isAvailable() {
+		return available;
+	}
+
+	public void setAvailable(boolean available) {
+		this.available = available;
 	}
 
 

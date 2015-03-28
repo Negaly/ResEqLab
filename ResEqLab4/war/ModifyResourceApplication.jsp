@@ -15,7 +15,7 @@
 <meta charset="utf-8">
 </head>
 <body>
-<nav class="navbar navbar-default" role="navigation">
+	<nav class="navbar navbar-default" role="navigation">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
@@ -90,6 +90,14 @@
 				<td><input type="number" name="sessionTime" id="sessionTime"
 					min="1" max="5"></td>
 			</tr>
+			<tr>
+				<td valign="available"><label for="available">Available</label></td>
+				<td><input type="radio" name="available" id="available"
+					value="1" checked>Yes <input type="radio"
+					name="available" id="available" value="0">No</td>
+
+			</tr>
+
 			<tr>
 				<td colspan="2" align="right"><input type="submit"
 					value="Modify" /></td>

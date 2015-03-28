@@ -50,7 +50,6 @@ public class ModifyResourceServlet extends HttpServlet {
 		String urlLinktext = "Login";
 
 		if (user != null) {
-			System.out.println(user);
 			url = userService.createLogoutURL(req.getRequestURI());
 			urlLinktext = "Logout";
 		}
@@ -79,17 +78,25 @@ public class ModifyResourceServlet extends HttpServlet {
 
 		UserService userService = UserServiceFactory.getUserService();
 		String user = userService.getCurrentUser().getUserId();
-		
+		boolean available = true;
 		String resourceId = req.getParameter("resourceId");
-		System.out.println(resourceId);
 		String title = checkNull(req.getParameter("title"));
 		String description = checkNull(req.getParameter("description"));
+		// String availableString = req.getParameter("available");
+		String availableString = req.getParameter("available");
 		int sessionTime = Integer.parseInt(req.getParameter("sessionTime"));
+		System.out.println("availableStringeq: "+availableString);
+		int a = Integer.parseInt(availableString);
+		System.out.println("a: "+a);
 
+		if (a== 0)
+			available = false;
+
+		System.out.println("Available: " + available);
 
 		try {
 			daoresource.modifyResource(Long.parseLong(resourceId), title,
-					description,sessionTime);
+					description, sessionTime, available);
 			resp.sendRedirect("/main");
 
 		} finally {

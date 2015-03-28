@@ -88,39 +88,45 @@
 		</tr>
 
 		<c:forEach items="${resources}" var="resource">
-			<tr>
-				<td><c:out value="${resource.title}" /></td>
-				<td><c:out value="${resource.description}" /></td>
-				<c:if test="${user != null}">
-					<td>
-						<form action="/reserve?id=${resource.id}&title=${resource.title}"
-							method="post" accept-charset="utf-8">
-							<div class="form-group">
+			<c:choose>
+				<c:when test="${resource.available}">
+					<tr>
+						<td><c:out value="${resource.title}" /></td>
+						<td><c:out value="${resource.description}" /></td>
+						<c:if test="${user != null}">
+							<td>
+								<form
+									action="/reserve?id=${resource.id}&title=${resource.title}"
+									method="post" accept-charset="utf-8">
+									<div class="form-group">
 
-								<div class="col-sm-5">
-									<div class="input-group date">
-										<span class="input-group-addon"><span id="datepick"
-											class="glyphicon glyphicon-calendar"></span> </span> <input
-											type="date" class="form-control" id="datepick" name="date">
-									</div>
-								</div>
-								<div class="col-sm-5">
-									<div class="input-group time">
-										<span class="input-group-addon"><span id="datepick"
-											class="glyphicon glyphicon-time"></span> </span> <input type="time"
-											class="form-control" id="mishoras" name="mishoras">
-									</div>
-								</div>
-								<div>
-									<input type="number" name="sessionTime" id="sessionTime"
-										min="1" max="${resource.sessionTime}">
-								</div>
-								<input type="submit" class="btn btn-success" value="Reserve">
-						</form>
-					</td>
-				</c:if>
+										<div class="col-sm-5">
+											<div class="input-group date">
+												<span class="input-group-addon"><span id="datepick"
+													class="glyphicon glyphicon-calendar"></span> </span> <input
+													type="date" class="form-control" id="datepick" name="date">
+											</div>
+										</div>
+										<div class="col-sm-5">
+											<div class="input-group time">
+												<span class="input-group-addon"><span id="datepick"
+													class="glyphicon glyphicon-time"></span> </span> <input
+													type="time" class="form-control" id="mishoras"
+													name="mishoras">
+											</div>
+										</div>
+										<div>
+											<input type="number" name="sessionTime" id="sessionTime"
+												min="1" max="${resource.sessionTime}">
+										</div>
+										<input type="submit" class="btn btn-success" value="Reserve">
+								</form>
+							</td>
+						</c:if>
 
-			</tr>
+					</tr>
+				</c:when>
+			</c:choose>
 		</c:forEach>
 	</table>
 
