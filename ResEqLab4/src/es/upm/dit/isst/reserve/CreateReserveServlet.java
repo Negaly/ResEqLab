@@ -32,6 +32,8 @@ public class CreateReserveServlet extends HttpServlet {
 		String id = req.getParameter("id");
 		String startdate = req.getParameter("date");
 		String starthour = req.getParameter("mishoras");
+		//String sessionTime = req.getParameter("sessionTime");
+
 		UserService userService = UserServiceFactory.getUserService();
 		String user = userService.getCurrentUser().getUserId();
 		

@@ -18,12 +18,13 @@ public class Resource implements Serializable {
 	private Long id;
 	private String title;
 	private String description;
+	private int sessionTime;
 	private List<Long> reserves; 
 	
-	public Resource(String title, String description) {
+	public Resource(String title, String description,int sessionTime) {
 		this.title = title;
-		this.description = description;
-		
+		this.description = description;		
+		this.sessionTime = sessionTime;
 	}
 
 	public Long getId() {
@@ -51,6 +52,14 @@ public class Resource implements Serializable {
 	}
 	public void addReserve(Long reserve) {
 		this.reserves.add(reserve);
+	}
+	public int getSessionTime() {
+		System.out.println(sessionTime);
+		return sessionTime;
+	}
+
+	public void setSessionTime(int sessionTime) {
+		this.sessionTime = sessionTime;
 	}
 
 

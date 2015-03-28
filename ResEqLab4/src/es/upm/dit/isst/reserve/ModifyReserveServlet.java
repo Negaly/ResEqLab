@@ -41,6 +41,11 @@ public class ModifyReserveServlet extends HttpServlet {
 		String startdate = req.getParameter("date");
 		String starthour = req.getParameter("mishoras");
 		String title = req.getParameter("title");
+		String resourceId = req.getParameter("resourceId");
+		//Esto es para cargar el tiempo de sesionmaximo xD
+		//Resource resource =daoresource.getResource(Long.parseLong(resourceId));
+		//int sessionTime = resource.getSessionTime();
+		int sessionTime = Integer.parseInt(req.getParameter("sessionTime"));
 		String endhour = starthour;
 
 		// Cambiamos de string al formato de Calendar
@@ -54,9 +59,14 @@ public class ModifyReserveServlet extends HttpServlet {
 		int Eyear = Integer.parseInt(enddate.split("-")[0]);
 		int Emonth = Integer.parseInt(enddate.split("-")[1]);
 		int Eday = Integer.parseInt(enddate.split("-")[2]);
-		int Ehour = Integer.parseInt(endhour.split(":")[0]);
+		int Ehour = Integer.parseInt(endhour.split(":")[0])+sessionTime;
 		int Emin = Integer.parseInt(endhour.split(":")[1]);
 
+		System.out.println("Start hour: ");
+		System.out.println(Shour);
+		System.out.println("End hour: ");
+		System.out.println(Ehour);
+		
 		Calendar start = new GregorianCalendar(Syear, Smonth, Sday, Shour, Smin);
 		Calendar end = new GregorianCalendar(Eyear, Emonth, Eday, Ehour, Emin);
 
@@ -97,6 +107,8 @@ public class ModifyReserveServlet extends HttpServlet {
 			throws IOException, ServletException {
 	    String reserveId = req.getParameter("reserveId");
 	    ReserveDAO dao = ReserveDAOImpl.getInstance();
+	    ResourceDAO resourcedao = ResourceDAOImpl.getInstance();
+
 	    System.out.println(reserveId);
 	    Reserve reserve = dao.getReserve(Long.parseLong(reserveId));
 		
@@ -119,6 +131,7 @@ public class ModifyReserveServlet extends HttpServlet {
 		
 		req.getSession().setAttribute("resourceId", reserve.getResource());
 		req.getSession().setAttribute("reserveId", reserveId);
+		req.getSession().setAttribute("resource", resourcedao.getResource(reserve.getResource()));
 
 		req.getSession().setAttribute("user", user);
 		req.getSession().setAttribute("reserve", reserve);

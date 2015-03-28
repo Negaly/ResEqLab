@@ -77,21 +77,12 @@
 
 
 	<table class="table" style="width: 100%;" align="center">
-		<tr>
-			<th>Title</th>
-			<th>Description</th>
-			<c:choose>
-				<c:when test="${user != null}">
-					<th>Action</th>
-				</c:when>
-			</c:choose>
-		</tr>
 
 		<tr>
 			<c:if test="${user != null}">
 				<td>
 					<form
-						action="/modifyReserve?reserveId=${reserveId}&title=${resourceId}"
+						action="/modifyReserve?reserveId=${reserveId}&title=${resourceId}&resourceId=${resource.id}"
 						method="post" accept-charset="utf-8">
 						<div class="form-group">
 							<div class="col-sm-5">
@@ -101,14 +92,20 @@
 										type="date" class="form-control" id="datepick" name="date">
 								</div>
 							</div>
-							<div class="col-sm-5">
+							<div class="col-sm-3">
 								<div class="input-group time">
 									<span class="input-group-addon"><span id="datepick"
 										class="glyphicon glyphicon-time"></span> </span> <input type="time"
 										class="form-control" id="mishoras" name="mishoras">
 								</div>
 							</div>
-
+							<div class="col-sm-2">
+							<div class="input-group time">
+							<span class="input-group-addon"><span id="datepick"
+										class="glyphicon glyphicon-time"></span> </span>
+								<input type="number" name="sessionTime" id="sessionTime" min="1"
+									max="${resource.sessionTime}" class="form-control">
+							</div>
 							<input type="submit" class="btn btn-success" value="Reserve">
 					</form>
 				</td>

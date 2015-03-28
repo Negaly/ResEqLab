@@ -82,6 +82,12 @@
 				<td><textarea rows="4" cols="50" name="description"
 						id="description"></textarea></td>
 			</tr>
+			<tr>
+				<td valign="sessionTime"><label for="sessionTime">Session
+						Time</label></td>
+				<td><input type="number" name="sessionTime" id="sessionTime"
+					min="1" max="5"></td>
+			</tr>
 
 			<tr>
 				<td colspan="2" align="right"><input type="submit"

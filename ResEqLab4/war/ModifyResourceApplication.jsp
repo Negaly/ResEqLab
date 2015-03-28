@@ -6,18 +6,15 @@
 <%@page isELIgnored="false"%>
 
 <!DOCTYPE html>
-
-
 <html>
 <head>
-<title>Resources</title>
+<title>Modify Resource</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
-
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <meta charset="utf-8">
 </head>
 <body>
-
-
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -50,7 +47,7 @@
 
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li class="active"><a href="/login.jsp"> <c:choose>
+					<li class="active"><a href="<c:url value="${url}"/>"> <c:choose>
 								<c:when test="${user != null}">
 									<span class="glyphicon glyphicon-off"> </span>
 								</c:when>
@@ -69,76 +66,31 @@
 	<div style="width: 100%;">
 		<div class="line"></div>
 		<div class="topLine">
-			<h1 style="text-align: center">Resources</h1>
+			<h1 style="text-align: center">New resource</h1>
 			<div style="float: right;"></div>
 		</div>
 	</div>
 
-
-
-	<table class="table" style="width: 100%;" align="center">
-		<tr>
-			<th>Title</th>
-			<th>Description</th>
-			<c:choose>
-				<c:when test="${user != null}">
-					<th>Action</th>
-				</c:when>
-			</c:choose>
-		</tr>
-
-		<c:forEach items="${resources}" var="resource">
+	<form action="/modifyResource?resourceId=${resourceId}" method="post" accept-charset="utf-8">
+		<table class="table" style="width: 80%;" align="center">
 			<tr>
-				<td><c:out value="${resource.title}" /></td>
-				<td><c:out value="${resource.description}" /></td>
-				<c:if test="${user != null}">
-					<td>
-						<form action="/reserve?id=${resource.id}&title=${resource.title}"
-							method="post" accept-charset="utf-8">
-							<div class="form-group">
-
-								<div class="col-sm-5">
-									<div class="input-group date">
-										<span class="input-group-addon"><span id="datepick"
-											class="glyphicon glyphicon-calendar"></span> </span> <input
-											type="date" class="form-control" id="datepick" name="date">
-									</div>
-								</div>
-								<div class="col-sm-5">
-									<div class="input-group time">
-										<span class="input-group-addon"><span id="datepick"
-											class="glyphicon glyphicon-time"></span> </span> <input type="time"
-											class="form-control" id="mishoras" name="mishoras">
-									</div>
-								</div>
-								<div>
-									<input type="number" name="sessionTime" id="sessionTime"
-										min="1" max="${resource.sessionTime}">
-								</div>
-								<input type="submit" class="btn btn-success" value="Reserve">
-						</form>
-					</td>
-				</c:if>
-
+				<td><label for="title">Title</label></td>
+				<td><input type="text" name="title" id="title" size="65" value="${title}" /></td>
 			</tr>
-		</c:forEach>
-	</table>
+			<tr>
+				<td valign="description"><label for="description">Description</label></td>
+				<td><textarea rows="4" cols="50" name="description"
+						id="description">${description}</textarea></td>
+			</tr>
 
-	<hr />
+			<tr>
+				<td colspan="2" align="right"><input type="submit"
+					value="Modify" /></td>
+			</tr>
+		</table>
+	</form>
 
-
-
-
-	<footer>
-		<h6 small>
-			You have a total number of
-			<c:out value="${fn:length(resources)}" />
-			Resources.
-		</h6>
-	</footer>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	</div>
 	<script src="js/bootstrap.min.js"></script>
-
 </body>
 </html>

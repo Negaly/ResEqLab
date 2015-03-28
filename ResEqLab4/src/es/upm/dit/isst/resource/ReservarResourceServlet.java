@@ -33,7 +33,7 @@ public class ReservarResourceServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
-		ResourceDAO dao = ResourceDAOImpl.getInstance();
+		ResourceDAO resourcedao = ResourceDAOImpl.getInstance();
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
 
@@ -48,11 +48,10 @@ public class ReservarResourceServlet extends HttpServlet {
 		List<Resource> resources = new ArrayList<Resource>();
 
 		if (user != null) {
-			System.out.println(user);
 			url = userService.createLogoutURL(req.getRequestURI());
 			urlLinktext = "Logout";
 		}
-		resources = dao.getResources();
+		resources = resourcedao.getResources();
 
 		req.getSession().setAttribute("user", user);
 		req.getSession().setAttribute("resources",
@@ -74,14 +73,15 @@ public class ReservarResourceServlet extends HttpServlet {
 		UserService userService = UserServiceFactory.getUserService();
 		String user = userService.getCurrentUser().getUserId();
 
-		String id = req.getParameter("id");
+		String resourceId = req.getParameter("id");
 		String startdate = req.getParameter("date");
 		String starthour = req.getParameter("mishoras");
 		String title = req.getParameter("title");
-		String endhour = starthour;
 
-		EntityManager em = EMFService.get().createEntityManager();
-		Resource resource = em.find(Resource.class, Long.parseLong(id));
+		Resource resource =daoresource.getResource(Long.parseLong(resourceId));
+		int sessionTime = resource.getSessionTime();
+		String endhour = starthour;
+		
 		// Cambiamos de string al formato de Calendar
 		String enddate = startdate;
 		int Syear = Integer.parseInt(startdate.split("-")[0]);
@@ -93,7 +93,7 @@ public class ReservarResourceServlet extends HttpServlet {
 		int Eyear = Integer.parseInt(enddate.split("-")[0]);
 		int Emonth = Integer.parseInt(enddate.split("-")[1]);
 		int Eday = Integer.parseInt(enddate.split("-")[2]);
-		int Ehour = Integer.parseInt(endhour.split(":")[0]);
+		int Ehour = Integer.parseInt(endhour.split(":")[0] + sessionTime);
 		int Emin = Integer.parseInt(endhour.split(":")[1]);
 
 		Calendar start = new GregorianCalendar(Syear, Smonth, Sday, Shour, Smin);
@@ -108,13 +108,15 @@ public class ReservarResourceServlet extends HttpServlet {
 		}
 
 		// falta definir tiempo de sesion
-		daoreserve.add(start, end, user, Long.parseLong(id));
+		daoreserve.add(start, end, user, Long.parseLong(resourceId));
 
 		try {
-			daoresource.addReserve(Long.parseLong(id), user);// la id que metes
-																// es la de la
-																// reserva,
-																// CUIDADO
+			daoresource.addReserve(Long.parseLong(resourceId), user);// la id
+																		// que
+																		// metes
+			// es la de la
+			// reserva,
+			// CUIDADO
 			resp.sendRedirect("/main");
 
 		} finally {

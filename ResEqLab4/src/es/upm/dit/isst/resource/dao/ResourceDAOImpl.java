@@ -34,10 +34,10 @@ public class ResourceDAOImpl implements ResourceDAO {
 	}
 
 	@Override
-	public void add(String title, String description) {
+	public void add(String title, String description,int sessionTime) {
 		synchronized (this) {
 			EntityManager em = EMFService.get().createEntityManager();
-			Resource resource = new Resource(title, description);
+			Resource resource = new Resource(title, description,sessionTime);
 			em.persist(resource);
 			em.close();
 		}
