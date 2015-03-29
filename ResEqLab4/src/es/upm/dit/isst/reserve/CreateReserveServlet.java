@@ -27,21 +27,21 @@ public class CreateReserveServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-		System.out.println("Creating new Reserve ");
-
-		String id = req.getParameter("id");
-		String startdate = req.getParameter("date");
-		String starthour = req.getParameter("mishoras");
-		//String sessionTime = req.getParameter("sessionTime");
-
-		UserService userService = UserServiceFactory.getUserService();
-		String user = userService.getCurrentUser().getUserId();
-		
-
-		ReserveDAO dao = ReserveDAOImpl.getInstance();
-		//dao.add(starthour, starthour, startdate, startdate, user, resource);
-
-		resp.sendRedirect("/main");
+//		System.out.println("Creating new Reserve ");
+//
+//		String id = req.getParameter("id");
+//		String startdate = req.getParameter("date");
+//		String starthour = req.getParameter("mishoras");
+//		//String sessionTime = req.getParameter("sessionTime");
+//
+//		UserService userService = UserServiceFactory.getUserService();
+//		String user = userService.getCurrentUser().getUserId();
+//		
+//
+//		ReserveDAO dao = ReserveDAOImpl.getInstance();
+//		//dao.add(starthour, starthour, startdate, startdate, user, resource);
+//
+//		resp.sendRedirect("/main");
 	}
 
 	private String checkNull(String s) {
@@ -52,31 +52,31 @@ public class CreateReserveServlet extends HttpServlet {
 	}
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
-		ResourceDAO dao = ResourceDAOImpl.getInstance();
-
-		UserService userService = UserServiceFactory.getUserService();
-		User user = userService.getCurrentUser();
-
-		String url = userService.createLoginURL("/createUser");
-		String urlLinktext = "Login";
-		List<Resource> resources = new ArrayList<Resource>();
-
-		if (user != null) {
-			// if (true){
-			System.out.println(user);
-			url = userService.createLogoutURL(req.getRequestURI());
-			urlLinktext = "Logout";
-		}
-		resources = dao.getResources();
-
-		req.getSession().setAttribute("user", user);
-		req.getSession().setAttribute("resources",
-				new ArrayList<Resource>(resources));
-		req.getSession().setAttribute("url", url);
-		req.getSession().setAttribute("urlLinktext", urlLinktext);
-
-		RequestDispatcher view = req
-				.getRequestDispatcher("ResourceResApplication.jsp");
-		view.forward(req, resp);
+//		ResourceDAO dao = ResourceDAOImpl.getInstance();
+//
+//		UserService userService = UserServiceFactory.getUserService();
+//		User user = userService.getCurrentUser();
+//
+//		String url = userService.createLoginURL("/createUser");
+//		String urlLinktext = "Login";
+//		List<Resource> resources = new ArrayList<Resource>();
+//
+//		if (user != null) {
+//			// if (true){
+//			System.out.println(user);
+//			url = userService.createLogoutURL(req.getRequestURI());
+//			urlLinktext = "Logout";
+//		}
+//		resources = dao.getResources();
+//
+//		req.getSession().setAttribute("user", user);
+//		req.getSession().setAttribute("resources",
+//				new ArrayList<Resource>(resources));
+//		req.getSession().setAttribute("url", url);
+//		req.getSession().setAttribute("urlLinktext", urlLinktext);
+//
+//		RequestDispatcher view = req
+//				.getRequestDispatcher("ResourceResApplication.jsp");
+//		view.forward(req, resp);
 	}
 } 
