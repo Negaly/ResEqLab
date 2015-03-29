@@ -68,18 +68,16 @@ public class CreateUserServlet extends HttpServlet {
 
 			req.getSession().setAttribute("users",
 					new ArrayList<AppUser>(users));
-			alertHTML(out,"Bienvenido "+user.getNickname()+"!!");
-			
+			alertHTML(out, "Bienvenido " + user.getNickname() + "!!");
+
 		}
 		out.println("<script>location='/main';</script>");
 
-		//resp.sendRedirect("/main");
-	
+		// resp.sendRedirect("/main");
 
 	}
 
-	private void alertHTML(PrintWriter out, String message)
-			throws IOException {
+	private void alertHTML(PrintWriter out, String message) throws IOException {
 		out.println("<script type=\"text/javascript\">");
 		out.println("alert('" + message + "');");
 		out.println("</script>");

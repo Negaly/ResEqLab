@@ -48,7 +48,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>ModifyResource</servlet-name>
 		<servlet-class>es.upm.dit.isst.resource.ModifyResourceServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>RemoveReserve</servlet-name>
+		<servlet-class>es.upm.dit.isst.reserve.RemoveReserveServlet</servlet-class>
+	</servlet>
 
+	<servlet-mapping>
+		<servlet-name>RemoveReserve</servlet-name>
+		<url-pattern>/removeReserve</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>ModifyResource</servlet-name>
 		<url-pattern>/modifyResource</url-pattern>

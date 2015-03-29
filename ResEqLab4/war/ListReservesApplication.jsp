@@ -95,7 +95,7 @@
 				<c:choose>
 					<c:when test="${user!=null}">
 						<td><a class="btn btn-danger"
-							href="<c:url value="/removeReserve?ReserveId=${reserve.id}" />">Remove</a>
+							href="<c:url value="/removeReserve?reserveId=${reserve.id}" />">Remove</a>
 						<a class="btn btn-warning"
 							href="<c:url value="/modifyReserve?reserveId=${reserve.id}" />">Modify</a></td>
 					</c:when>

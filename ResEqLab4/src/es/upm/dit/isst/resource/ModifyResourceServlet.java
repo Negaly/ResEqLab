@@ -1,6 +1,7 @@
 package es.upm.dit.isst.resource;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,28 +32,34 @@ import es.upm.dit.isst.resource.model.Resource;
 public class ModifyResourceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	private void alertHTML(PrintWriter out, String message) throws IOException {
+		out.println("<script type=\"text/javascript\">");
+		out.println("alert('" + message + "');");
+		out.println("</script>");
+
+	}
+
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
 
-		String resourceId = req.getParameter("resourceId");
-
-		ResourceDAO dao = ResourceDAOImpl.getInstance();
+		// //////////USER/////////////////////////
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
-
 		boolean userAdmin = false;
 		if (userService.isUserLoggedIn()) {
 			userAdmin = userService.isUserAdmin();
 		}
 		req.getSession().setAttribute("userAdmin", userAdmin);
-
 		String url = userService.createLoginURL("/createUser");
 		String urlLinktext = "Login";
-
 		if (user != null) {
 			url = userService.createLogoutURL(req.getRequestURI());
 			urlLinktext = "Logout";
 		}
+		// /////////////RESOURCE///////////////
+		String resourceId = req.getParameter("resourceId");
+
+		ResourceDAO dao = ResourceDAOImpl.getInstance();
 
 		Resource resource = dao.getResource(Long.parseLong(resourceId));
 		String description = resource.getDescription();
@@ -73,33 +80,38 @@ public class ModifyResourceServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-		ResourceDAO daoresource = ResourceDAOImpl.getInstance();
-		ReserveDAO daoreserve = ReserveDAOImpl.getInstance();
+		if (UserServiceFactory.getUserService().isUserAdmin()) {
+			PrintWriter out = resp.getWriter();
 
-		UserService userService = UserServiceFactory.getUserService();
-		String user = userService.getCurrentUser().getUserId();
-		boolean available = true;
-		String resourceId = req.getParameter("resourceId");
-		String title = checkNull(req.getParameter("title"));
-		String description = checkNull(req.getParameter("description"));
-		String availableString = req.getParameter("available");
-		int sessionTime = Integer.parseInt(req.getParameter("sessionTime"));
-		System.out.println("availableStringeq: "+availableString);
-		int a = Integer.parseInt(availableString);
-		System.out.println("a: "+a);
+			ResourceDAO daoresource = ResourceDAOImpl.getInstance();
+			// ReserveDAO daoreserve = ReserveDAOImpl.getInstance();
 
-		if (a== 0)
-			available = false;
+			// UserService userService = UserServiceFactory.getUserService();
+			// String user = userService.getCurrentUser().getUserId();
+			boolean available = true;
+			String resourceId = req.getParameter("resourceId");
+			String title = checkNull(req.getParameter("title"));
+			String description = checkNull(req.getParameter("description"));
+			String availableString = req.getParameter("available");
+			int sessionTime = Integer.parseInt(check(req.getParameter("sessionTime")));
+			// System.out.println("availableStringeq: " + availableString);
+			int a = Integer.parseInt(availableString);
+			// System.out.println("a: " + a);
+			if (a == 0)
+				available = false;
+			// System.out.println("Available: " + available);
 
-		System.out.println("Available: " + available);
+			try {
+				daoresource.modifyResource(Long.parseLong(resourceId), title,
+						description, sessionTime, available);
+				alertHTML(out, "Recurso modificado!!");
 
-		try {
-			daoresource.modifyResource(Long.parseLong(resourceId), title,
-					description, sessionTime, available);
+			} finally {
+				out.println("<script>location='/main';</script>");
+			}
+		} else {
 			resp.sendRedirect("/main");
 
-		} finally {
-			resp.sendRedirect("/main");
 		}
 
 	}
@@ -107,6 +119,12 @@ public class ModifyResourceServlet extends HttpServlet {
 	private String checkNull(String s) {
 		if (s == null) {
 			return "";
+		}
+		return s;
+	}
+	private String check(String s) {
+		if (s.equals("")) {
+			return "1";
 		}
 		return s;
 	}

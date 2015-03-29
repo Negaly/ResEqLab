@@ -1,6 +1,7 @@
 package es.upm.dit.isst.resource;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,9 +32,16 @@ import es.upm.dit.isst.resource.model.Resource;
 public class ReservarResourceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	private void alertHTML(PrintWriter out, String message) throws IOException {
+		out.println("<script type=\"text/javascript\">");
+		out.println("alert('" + message + "');");
+		out.println("</script>");
+
+	}
+
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
-		ResourceDAO resourcedao = ResourceDAOImpl.getInstance();
+		// /////////////USER////////////////////
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
 
@@ -50,77 +58,85 @@ public class ReservarResourceServlet extends HttpServlet {
 		if (user != null) {
 			url = userService.createLogoutURL(req.getRequestURI());
 			urlLinktext = "Logout";
+
+			// /////////////////Crear Reserva y añadirla al recurso/////
+
+			ResourceDAO resourcedao = ResourceDAOImpl.getInstance();
+
+			resources = resourcedao.getResources();
+
+			req.getSession().setAttribute("user", user);
+			req.getSession().setAttribute("resources",
+					new ArrayList<Resource>(resources));
+			req.getSession().setAttribute("url", url);
+			req.getSession().setAttribute("urlLinktext", urlLinktext);
+
+			RequestDispatcher view = req
+					.getRequestDispatcher("ResourceResApplication.jsp");
+			view.forward(req, resp);
+		} else {
+			resp.sendRedirect(url);
 		}
-		resources = resourcedao.getResources();
-
-		req.getSession().setAttribute("user", user);
-		req.getSession().setAttribute("resources",
-				new ArrayList<Resource>(resources));
-		req.getSession().setAttribute("url", url);
-		req.getSession().setAttribute("urlLinktext", urlLinktext);
-
-		RequestDispatcher view = req
-				.getRequestDispatcher("ResourceResApplication.jsp");
-		view.forward(req, resp);
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-
-		ResourceDAO daoresource = ResourceDAOImpl.getInstance();
-		ReserveDAO daoreserve = ReserveDAOImpl.getInstance();
-
 		UserService userService = UserServiceFactory.getUserService();
 		String user = userService.getCurrentUser().getUserId();
 
-		String resourceId = req.getParameter("id");
-		String startdate = req.getParameter("date");
-		String starthour = req.getParameter("mishoras");
-		String title = req.getParameter("title");
+		if (user != null) {// ///LEVEL/////
+			ResourceDAO daoresource = ResourceDAOImpl.getInstance();
+			ReserveDAO daoreserve = ReserveDAOImpl.getInstance();
 
-		Resource resource =daoresource.getResource(Long.parseLong(resourceId));
-		int sessionTime = resource.getSessionTime();
-		String endhour = starthour;
-		
-		// Cambiamos de string al formato de Calendar
-		String enddate = startdate;
-		int Syear = Integer.parseInt(startdate.split("-")[0]);
-		int Smonth = Integer.parseInt(startdate.split("-")[1]);
-		int Sday = Integer.parseInt(startdate.split("-")[2]);
-		int Shour = Integer.parseInt(starthour.split(":")[0]);
-		int Smin = Integer.parseInt(starthour.split(":")[1]);
+			String resourceId = req.getParameter("id");
+			String startdate = req.getParameter("date");
+			String starthour = req.getParameter("mishoras");
+			String title = req.getParameter("title");
 
-		int Eyear = Integer.parseInt(enddate.split("-")[0]);
-		int Emonth = Integer.parseInt(enddate.split("-")[1]);
-		int Eday = Integer.parseInt(enddate.split("-")[2]);
-		int Ehour = Integer.parseInt(endhour.split(":")[0] + sessionTime);
-		int Emin = Integer.parseInt(endhour.split(":")[1]);
+			Resource resource = daoresource.getResource(Long
+					.parseLong(resourceId));
+			int sessionTime = resource.getSessionTime();
+			String endhour = starthour;
 
-		Calendar start = new GregorianCalendar(Syear, Smonth, Sday, Shour, Smin);
-		Calendar end = new GregorianCalendar(Eyear, Emonth, Eday, Ehour, Emin);
+			// Cambiamos de string al formato de Calendar
+			String enddate = startdate;
+			int Syear = Integer.parseInt(startdate.split("-")[0]);
+			int Smonth = Integer.parseInt(startdate.split("-")[1]);
+			int Sday = Integer.parseInt(startdate.split("-")[2]);
+			int Shour = Integer.parseInt(starthour.split(":")[0]);
+			int Smin = Integer.parseInt(starthour.split(":")[1]);
 
-		// COMPROBAMOS QUE EL RECURSO NO ESTA OCUPADO EN ESE MOMENTO
-		ReserveDAO reservedao = ReserveDAOImpl.getInstance();
-		List<Reserve> reserves = new ArrayList<Reserve>();
-		reserves = reservedao.getReserves();
+			int Eyear = Integer.parseInt(enddate.split("-")[0]);
+			int Emonth = Integer.parseInt(enddate.split("-")[1]);
+			int Eday = Integer.parseInt(enddate.split("-")[2]);
+			int Ehour = Integer.parseInt(endhour.split(":")[0] + sessionTime);
+			int Emin = Integer.parseInt(endhour.split(":")[1]);
 
-		for (Reserve reserve : reserves) {
-		}
+			Calendar start = new GregorianCalendar(Syear, Smonth, Sday, Shour,
+					Smin);
+			Calendar end = new GregorianCalendar(Eyear, Emonth, Eday, Ehour,
+					Emin);
 
-		// falta definir tiempo de sesion
-		daoreserve.add(start, end, user, Long.parseLong(resourceId));
+			// COMPROBAMOS QUE EL RECURSO NO ESTA OCUPADO EN ESE MOMENTO
+			ReserveDAO reservedao = ReserveDAOImpl.getInstance();
+			List<Reserve> reserves = new ArrayList<Reserve>();
+			reserves = reservedao.getReserves();
+			for (Reserve reserve : reserves) {
+			}
+			// falta definir tiempo de sesion
+			daoreserve.add(start, end, user, Long.parseLong(resourceId));
+			PrintWriter out = resp.getWriter();
+			try {
+				daoresource.addReserve(Long.parseLong(resourceId), user);
+				alertHTML(out, "Reservado el recurso " + title + "!!");
 
-		try {
-			daoresource.addReserve(Long.parseLong(resourceId), user);// la id
-																		// que
-																		// metes
-			// es la de la
-			// reserva,
-			// CUIDADO
-			resp.sendRedirect("/main");
+			} finally {
+				out.println("<script>location='/reserve';</script>");
 
-		} finally {
-			resp.sendRedirect("/reserve");
+			}
+
+		} else {
+			resp.sendRedirect(userService.createLoginURL("/createUser"));
 		}
 
 	}
