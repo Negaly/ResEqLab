@@ -46,7 +46,7 @@ public class ListReserveServlet extends HttpServlet {
 	// }
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
-
+		
 		// modificariaa esto para que liste las reservas de cada recurso, asi
 		// puedo mostar el nombre del recurso mas facilmente.
 		// /////////////////GESTION USER////////////////////////////////////

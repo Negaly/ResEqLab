@@ -23,7 +23,8 @@ public class RemoveReserveServlet extends HttpServlet {
 			String id = req.getParameter("reserveId");
 			ReserveDAO dao = ReserveDAOImpl.getInstance();
 			dao.remove(Long.parseLong(id));
-			alertHTML(out, "Reserva eliminada!!");
+			//alertHTML(out, "Reserva eliminada!!");
+			req.getSession().setAttribute("dialogo", "Reserva Eliminada Correctamente!");
 			out.println("<script>location='/listReserves';</script>");
 
 		} else {

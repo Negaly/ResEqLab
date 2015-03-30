@@ -35,6 +35,7 @@ public class ReservarResourceServlet extends HttpServlet {
 	private void alertHTML(PrintWriter out, String message) throws IOException {
 		out.println("<script type=\"text/javascript\">");
 		out.println("alert('" + message + "');");
+		
 		out.println("</script>");
 
 	}
@@ -128,7 +129,11 @@ public class ReservarResourceServlet extends HttpServlet {
 			PrintWriter out = resp.getWriter();
 			try {
 				daoresource.addReserve(Long.parseLong(resourceId), user);
-				alertHTML(out, "Reservado el recurso " + title + "!!");
+				//alertHTML(out, "Reservado el recurso " + title + "!!");
+				req.getSession().setAttribute("dialogo", "Reserva realizada!");
+				System.out.println("llego aqui");
+				resp.sendRedirect("/mandamail?title="+title+"&date="+startdate+"&mishoras="+starthour);
+				
 
 			} finally {
 				out.println("<script>location='/reserve';</script>");

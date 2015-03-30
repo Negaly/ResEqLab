@@ -70,8 +70,13 @@
 			<div style="float: right;"></div>
 		</div>
 	</div>
-
-	
+	<div class=container>
+	<c:if test="${dialogo != null}">
+	<div class="alert alert-success"  style="width: 100%;">
+    <a href="#" class="close" data-dismiss="alert">&times;</a>
+    <strong>${dialogo}</strong>
+	</div>
+	</c:if>	
 
 	<table class="table table-striped" style="width: 60%;" align="center">
 		<tr>
@@ -102,7 +107,7 @@
 		</c:forEach>
 	</table>
 
-
+	</div>
 
 	<hr />
 

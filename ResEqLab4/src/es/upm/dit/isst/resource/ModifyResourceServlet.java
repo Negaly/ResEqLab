@@ -104,7 +104,8 @@ public class ModifyResourceServlet extends HttpServlet {
 			try {
 				daoresource.modifyResource(Long.parseLong(resourceId), title,
 						description, sessionTime, available);
-				alertHTML(out, "Recurso modificado!!");
+				//alertHTML(out, "Recurso modificado!!");
+				req.getSession().setAttribute("dialogo", "Recurso Modificado Correctamente!");
 
 			} finally {
 				out.println("<script>location='/main';</script>");

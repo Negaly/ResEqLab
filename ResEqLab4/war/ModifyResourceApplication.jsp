@@ -70,6 +70,13 @@
 			<div style="float: right;"></div>
 		</div>
 	</div>
+	
+	<c:if test="${dialogo != null}">
+	<div class="alert alert-success"  style="width: 100%;">
+    <a href="#" class="close" data-dismiss="alert">&times;</a>
+    <strong>${dialogo}</strong>
+	</div>
+	</c:if>
 
 	<form action="/modifyResource?resourceId=${resourceId}" method="post"
 		accept-charset="utf-8">

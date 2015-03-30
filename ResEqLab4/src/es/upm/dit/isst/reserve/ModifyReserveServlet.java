@@ -78,7 +78,8 @@ public class ModifyReserveServlet extends HttpServlet {
 			}
 			try {
 				reservedao.update(Long.parseLong(reserveId), start, end);
-				alertHTML(out, "Modificada la reserva !!");
+				//alertHTML(out, "Modificada la reserva !!");
+				req.getSession().setAttribute("dialogo", "Reserva modificada Correctamente!");
 
 			} finally {
 				//resp.sendRedirect("/listReserves");
@@ -100,6 +101,8 @@ public class ModifyReserveServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
+		
+		req.getSession().setAttribute("dialogo","");
 		// //////////////////USER//////////////////////
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();

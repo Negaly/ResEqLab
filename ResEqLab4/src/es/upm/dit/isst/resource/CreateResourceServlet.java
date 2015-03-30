@@ -38,7 +38,8 @@ public class CreateResourceServlet extends HttpServlet {
 		ResourceDAO dao = ResourceDAOImpl.getInstance();
 		dao.add(title, Description, sessionTime);
 		PrintWriter out = resp.getWriter();
-		alertHTML(out, "Creado el recurso " + title + "!!");
+		//alertHTML(out, "Creado el recurso " + title + "!!");
+		req.getSession().setAttribute("dialogo", "Recurso Creado Correctamente!");
 		out.println("<script>location='/main';</script>");
 
 		// resp.sendRedirect("/main");

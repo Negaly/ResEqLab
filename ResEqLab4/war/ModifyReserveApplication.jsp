@@ -74,7 +74,12 @@
 		</div>
 	</div>
 
-
+	<c:if test="${dialogo != null}">
+	<div class="alert alert-success"  style="width: 100%;">
+    <a href="#" class="close" data-dismiss="alert">&times;</a>
+    <strong>${dialogo}</strong>
+	</div>
+	</c:if>
 
 	<table class="table" style="width: 100%;" align="center">
 
@@ -115,8 +120,8 @@
 	</table>
 
 	<hr />
-
-
+	
+	
 
 
 	<footer>
