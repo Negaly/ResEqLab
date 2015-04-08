@@ -17,18 +17,25 @@ public class RemoveReserveServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-		PrintWriter out = resp.getWriter();
+		//PrintWriter out = resp.getWriter();
 		// /////COMPROBACION ADMIN///////////
 		if (UserServiceFactory.getUserService().isUserLoggedIn()) {// /LEVEL///
 			String id = req.getParameter("reserveId");
+			String resourceId = req.getParameter("id");
+			String fechahora = req.getParameter("datehour");
+			String startdate = req.getParameter("mishoras");
+			String starthour = req.getParameter("mishoras");
+			String title = req.getParameter("title");
+			System.out.println("Esto es lo que mando:\n"+id+title+startdate+starthour);
 			ReserveDAO dao = ReserveDAOImpl.getInstance();
 			dao.remove(Long.parseLong(id));
 			//alertHTML(out, "Reserva eliminada!!");
 			req.getSession().setAttribute("dialogo", "Reserva Eliminada Correctamente!");
-			out.println("<script>location='/listReserves';</script>");
+			//out.println("<script>location='/listReserves';</script>");
+			resp.sendRedirect("/removemail?title="+title+"&date="+fechahora+"&mishoras="+starthour);
 
 		} else {
-			out.println("<script>location='/main';</script>");
+			//out.println("<script>location='/main';</script>");
 		}
 	}
 

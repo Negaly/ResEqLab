@@ -1,4 +1,4 @@
-package es.upm.dit.isst.reserve;
+package mail;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,14 +24,14 @@ import es.upm.dit.isst.resource.dao.ResourceDAO;
 import es.upm.dit.isst.resource.dao.ResourceDAOImpl;
 import es.upm.dit.isst.resource.model.Resource;
 
-public class EmailConfirmReserveServlet extends HttpServlet {
+public class EmailRemoveReserveServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		
-		System.out.println("llego mail serv");
+		//System.out.println("llego mail serv");
 		UserService userService = UserServiceFactory.getUserService();
 		String user = userService.getCurrentUser().getEmail();
 
@@ -48,16 +48,17 @@ public class EmailConfirmReserveServlet extends HttpServlet {
 					"noreply@testing-isst.appspotmail.com",
 					"ResEqLab Team"));
 			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(user, user));
-			msg.setSubject("You have done a reserve im ResEqLab");
-			String msgBody = "Your reservation details are: \n \n - Resource: "
+			msg.setSubject("You have removed a reserve im ResEqLab");
+			String msgBody = "Your reservation of "
 					+ title + "\n - Hour : " + starthour
-					+ "\n - Date: " + startdate+"\n";
+					+ "\n - Date: " + startdate+"\n Has been removed. If you didn't make this log in into "
+							+ "http://reseqlab.appspot.com";
 
 			msgBody += System.getProperty("line.separator") + "Kind Regards,"
 					+ System.getProperty("line.separator") + "ResEqLab Team";
 			msg.setText(msgBody);
 			Transport.send(msg);
-			System.out.println(msgBody);
+			//System.out.println(msgBody);
 			resp.sendRedirect("/main");
 
 		} catch (Exception e) {

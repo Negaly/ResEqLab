@@ -40,8 +40,11 @@ public class ModifyReserveServlet extends HttpServlet {
 			String reserveId = req.getParameter("reserveId");
 			String startdate = req.getParameter("date");
 			String starthour = req.getParameter("mishoras");
-			String title = req.getParameter("title");
-			String resourceId = req.getParameter("resourceId");
+			String resId = req.getParameter("title");
+			ResourceDAO dao = ResourceDAOImpl.getInstance();
+
+			Resource resource = dao.getResource(Long.parseLong(resId));
+			String title = resource.getTitle();
 			int sessionTime = Integer.parseInt(req.getParameter("sessionTime"));
 			String endhour = starthour;
 
@@ -80,7 +83,7 @@ public class ModifyReserveServlet extends HttpServlet {
 				reservedao.update(Long.parseLong(reserveId), start, end);
 				//alertHTML(out, "Modificada la reserva !!");
 				req.getSession().setAttribute("dialogo", "Reserva modificada Correctamente!");
-
+				resp.sendRedirect("/updatemail?title="+title+"&date="+startdate+"&mishoras="+starthour);
 			} finally {
 				//resp.sendRedirect("/listReserves");
 				out.println("<script>location='/listReserves';</script>");

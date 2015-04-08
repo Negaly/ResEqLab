@@ -54,7 +54,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	</servlet>
 	<servlet>
 		<servlet-name>EmailReserve</servlet-name>
-		<servlet-class>es.upm.dit.isst.reserve.EmailConfirmReserveServlet</servlet-class>
+		<servlet-class>mail.EmailConfirmReserveServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>EmailRemoveReserve</servlet-name>
+		<servlet-class>mail.EmailRemoveReserveServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>EmailUpdateReserve</servlet-name>
+		<servlet-class>mail.EmailUpdateReserveServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -64,6 +72,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	<servlet-mapping>
 		<servlet-name>EmailReserve</servlet-name>
 		<url-pattern>/mandamail</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>EmailRemoveReserve</servlet-name>
+		<url-pattern>/removemail</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>EmailUpdateReserve</servlet-name>
+		<url-pattern>/updatemail</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>ModifyResource</servlet-name>

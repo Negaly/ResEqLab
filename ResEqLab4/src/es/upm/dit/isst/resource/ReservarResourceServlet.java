@@ -101,12 +101,18 @@ public class ReservarResourceServlet extends HttpServlet {
 
 			// Cambiamos de string al formato de Calendar
 			String enddate = startdate;
+			System.out.println(enddate);
 			int Syear = Integer.parseInt(startdate.split("-")[0]);
+			System.out.println("Syear: "+Syear);
 			int Smonth = Integer.parseInt(startdate.split("-")[1]);
+			System.out.println("Smonth: "+Syear);
 			int Sday = Integer.parseInt(startdate.split("-")[2]);
+			System.out.println("Sday: "+Syear);
 			int Shour = Integer.parseInt(starthour.split(":")[0]);
+			System.out.println("Shour: "+Syear);
 			int Smin = Integer.parseInt(starthour.split(":")[1]);
-
+			System.out.println("Smin: "+Syear);
+			
 			int Eyear = Integer.parseInt(enddate.split("-")[0]);
 			int Emonth = Integer.parseInt(enddate.split("-")[1]);
 			int Eday = Integer.parseInt(enddate.split("-")[2]);
@@ -131,7 +137,7 @@ public class ReservarResourceServlet extends HttpServlet {
 				daoresource.addReserve(Long.parseLong(resourceId), user);
 				//alertHTML(out, "Reservado el recurso " + title + "!!");
 				req.getSession().setAttribute("dialogo", "Reserva realizada!");
-				System.out.println("llego aqui");
+				//System.out.println("llego aqui");
 				resp.sendRedirect("/mandamail?title="+title+"&date="+startdate+"&mishoras="+starthour);
 				
 
