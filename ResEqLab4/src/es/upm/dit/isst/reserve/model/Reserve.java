@@ -29,16 +29,19 @@ public class Reserve implements Serializable {
 
 	public Reserve(Calendar start, Calendar end, String user, long resource) {
 		// Integer.parseInt(enteroString) // reservas del
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy/hh/mm");
-		String strdate = sdf.format(start.getTime());
-		String enddate = sdf.format(end.getTime());
-		System.out.println(strdate);
-
-		this.end = strdate;
-		this.start = enddate;
-
-		// this.end = start;
-		// this.start = end;
+//		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy/hh/mm");
+//		String strdate = sdf.format(start.getTime());
+//		String enddate = sdf.format(end.getTime());
+//		System.out.println(strdate);
+//
+//		this.end = enddate;
+//		this.start = strdate;
+		
+		String startDate = dateFormat(start);
+		String endDate = dateFormat(end);
+			
+		 this.end = endDate;
+		 this.start =  startDate;
 
 		this.user = user;
 		this.resource = resource;
@@ -54,9 +57,11 @@ public class Reserve implements Serializable {
 	}
 
 	public void setEnd(Calendar end) {
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy/hh/mm");
-		String enddate = sdf.format(end.getTime());
-		this.end = enddate;
+//		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy/hh/mm");
+//		String enddate = sdf.format(end.getTime());
+		String endDate = dateFormat(end);
+
+		this.end = endDate;
 	}
 
 	public String getStart() {
@@ -64,9 +69,13 @@ public class Reserve implements Serializable {
 	}
 
 	public void setStart(Calendar start) {
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy/hh/mm");
-		String strdate = sdf.format(start.getTime());
-		this.start = strdate;
+//		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy/hh/mm");
+//		String strdate = sdf.format(start.getTime());
+//		this.start = strdate;
+		
+		String startDate = dateFormat(start);
+
+		this.end = startDate;
 	}
 
 	public String getUser() {
@@ -85,4 +94,15 @@ public class Reserve implements Serializable {
 		this.resource = resource;
 	}
 
+	public String dateFormat(Calendar calendar){
+		calendar.get(Calendar.YEAR);
+		calendar.get(Calendar.HOUR);
+		
+		String date = calendar.get(Calendar.MONTH) + "-" +
+			 	  	  calendar.get(Calendar.DAY_OF_MONTH) + "-" +
+				 	  calendar.get(Calendar.YEAR) + "   " +
+				 	  calendar.get(Calendar.HOUR) + ":" +
+				 	  calendar.get(Calendar.MINUTE);
+		return date;
+	}
 }

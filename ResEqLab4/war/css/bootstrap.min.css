@@ -728,6 +728,29 @@ pre code {
 	padding-right: 15px
 }
 
+.mapSquare{
+    background-color:grey;
+    margin-left: auto;
+    margin-right: auto;    
+    width: 600px;
+    height: 500px;
+}
+
+.map {
+    background-color:grey;
+    float: left;
+    width: 110px;
+    height: 90px;
+    margin: 5px;
+}
+
+.mapOc {
+    background-color:red;
+    float: left;
+    width: 110px;
+    height: 90px;
+    margin: 5px;
+}
 @media ( min-width :768px) {
 	.container {
 		width: 750px

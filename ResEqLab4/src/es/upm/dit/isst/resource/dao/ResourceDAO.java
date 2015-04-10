@@ -18,5 +18,5 @@ public interface ResourceDAO {
     public void addReserve(long resourceid, String user);
 	public Resource getResource(long resourceId);
 	public void modifyResource(long resourceId, String title, String description,int sessionTime,boolean available);
-
+	public boolean proDisp(String startDate, String endDate, Resource resource);
 }

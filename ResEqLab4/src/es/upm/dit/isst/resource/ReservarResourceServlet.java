@@ -60,7 +60,7 @@ public class ReservarResourceServlet extends HttpServlet {
 			url = userService.createLogoutURL(req.getRequestURI());
 			urlLinktext = "Logout";
 
-			// /////////////////Crear Reserva y añadirla al recurso/////
+			// /////////////////Crear Reserva y aï¿½adirla al recurso/////
 
 			ResourceDAO resourcedao = ResourceDAOImpl.getInstance();
 
@@ -83,7 +83,7 @@ public class ReservarResourceServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		UserService userService = UserServiceFactory.getUserService();
-		String user = userService.getCurrentUser().getUserId();
+		String user = userService.getCurrentUser().getNickname();
 
 		if (user != null) {// ///LEVEL/////
 			ResourceDAO daoresource = ResourceDAOImpl.getInstance();
@@ -96,22 +96,18 @@ public class ReservarResourceServlet extends HttpServlet {
 
 			Resource resource = daoresource.getResource(Long
 					.parseLong(resourceId));
-			int sessionTime = resource.getSessionTime();
+			int sessionTime = Integer.parseInt(req.getParameter("sessionTime"));
+			
 			String endhour = starthour;
 
 			// Cambiamos de string al formato de Calendar
 			String enddate = startdate;
 			System.out.println(enddate);
 			int Syear = Integer.parseInt(startdate.split("-")[0]);
-			System.out.println("Syear: "+Syear);
 			int Smonth = Integer.parseInt(startdate.split("-")[1]);
-			System.out.println("Smonth: "+Syear);
 			int Sday = Integer.parseInt(startdate.split("-")[2]);
-			System.out.println("Sday: "+Syear);
 			int Shour = Integer.parseInt(starthour.split(":")[0]);
-			System.out.println("Shour: "+Syear);
 			int Smin = Integer.parseInt(starthour.split(":")[1]);
-			System.out.println("Smin: "+Syear);
 			
 			int Eyear = Integer.parseInt(enddate.split("-")[0]);
 			int Emonth = Integer.parseInt(enddate.split("-")[1]);
@@ -123,14 +119,17 @@ public class ReservarResourceServlet extends HttpServlet {
 					Smin);
 			Calendar end = new GregorianCalendar(Eyear, Emonth, Eday, Ehour,
 					Emin);
+			
 
 			// COMPROBAMOS QUE EL RECURSO NO ESTA OCUPADO EN ESE MOMENTO
 			ReserveDAO reservedao = ReserveDAOImpl.getInstance();
 			List<Reserve> reserves = new ArrayList<Reserve>();
 			reserves = reservedao.getReserves();
 			for (Reserve reserve : reserves) {
+			//TODO:Reserve comprobation
 			}
-			// falta definir tiempo de sesion
+
+			///////
 			daoreserve.add(start, end, user, Long.parseLong(resourceId));
 			PrintWriter out = resp.getWriter();
 			try {
