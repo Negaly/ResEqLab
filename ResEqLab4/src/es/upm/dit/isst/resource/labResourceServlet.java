@@ -3,6 +3,8 @@ package es.upm.dit.isst.resource;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -30,9 +32,9 @@ public class labResourceServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-		public void doGet(HttpServletRequest req, HttpServletResponse resp)
+	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
-		
+
 		// modificariaa esto para que liste las reservas de cada recurso, asi
 		// puedo mostar el nombre del recurso mas facilmente.
 		// /////////////////GESTION USER////////////////////////////////////
@@ -50,12 +52,12 @@ public class labResourceServlet extends HttpServlet {
 			}
 			req.getSession().setAttribute("userAdmin", userAdmin);
 			// ////////////////Gestion Recursos y reservas//////////////////////
-			// ResourceDAO resourcedao = ResourceDAOImpl.getInstance();
+			ResourceDAO resourcedao = ResourceDAOImpl.getInstance();
 
 			ReserveDAO reservedao = ReserveDAOImpl.getInstance();
 
-//			reserves = new ArrayList<Reserve>();
-//			reserves = reservedao.getReserves();
+			// reserves = new ArrayList<Reserve>();
+			// reserves = reservedao.getReserves();
 
 			// Si no eres admin, solo ves las tuyas
 			if (!userAdmin && (user != null)) {// LEVEL en vez de admin
@@ -63,23 +65,31 @@ public class labResourceServlet extends HttpServlet {
 			}
 			// ///////////////Gestion de req y resp////////////////////////////
 			System.out.println(reserves);
-			
-			es.upm.dit.isst.lab.model.lab lab = new lab();
-			
-			Resource recurso = new Resource("recurso", "Esto es un recurso",3);
-			Resource ocupado = new Resource("ocupado", "Esto es un recurso",3);
-			
-			String[][] mapa = {{"recurso","ocupado",null,null,null},
-					 {null,null,null,null,null},
-					 {null,"ocupado",null,"recurso",null},
-					 {"ocupado",null,null,null,null},
-					 {null,null,"ocupado",null,"recurso"}};
 
-	//		Resource[][] mapa = {{recurso,null,null,null,null},
-		//			 {null,null,null,null,null},
-			//		 {null,null,null,null,null},
-				//	 {null,null,null,null,null},
-					// {null,null,null,null,null}};
+			es.upm.dit.isst.lab.model.lab lab = new lab();
+
+			Resource recurso = resourcedao.getResource(Long.parseLong("6192449487634432"));
+			Resource ocupado = new Resource("ocupado", "Esto es un recurso", 3);
+
+			Resource[][] mapaRecursos = {
+					{ recurso, ocupado, null, null, null },
+					{ null, null, null, null, null },
+					{ null, recurso, null, recurso, null },
+					{ ocupado, null, null, null, null },
+					{ null, null, ocupado, null, ocupado } };
+
+			Calendar start = new GregorianCalendar(2015, 1, 1, 0, 0);
+			Calendar end = new GregorianCalendar(2015, 1, 1, 1, 1);
+
+			Reserve reserva = new Reserve(start, end, "user", recurso.getId());
+
+			boolean[][] mapa = reservedao.mapCheck(mapaRecursos, reserva);
+			// Resource[][] mapa = {{recurso,null,null,null,null},
+			// {null,null,null,null,null},
+			// {null,null,null,null,null},
+			// {null,null,null,null,null},
+			// {null,null,null,null,null}};
+			
 
 			System.out.print(mapa.length);
 			req.getSession().setAttribute("user", user);
@@ -94,7 +104,5 @@ public class labResourceServlet extends HttpServlet {
 			resp.sendRedirect("/map");
 		}
 	}
-
-
 
 }

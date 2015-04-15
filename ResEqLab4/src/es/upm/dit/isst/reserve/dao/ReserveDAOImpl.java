@@ -110,6 +110,26 @@ public class ReserveDAOImpl implements ReserveDAO {
 		}
 	}
 
+	@Override
+	public boolean[][] mapCheck(Resource[][] resourceMap, Reserve hora) {
+		boolean[][] mapBoolean = new boolean[resourceMap[0].length][resourceMap.length];
+		for (int i = 0; i < resourceMap.length; i++) {
+			for (int j = 0; i < resourceMap[0].length; j++) {
+				if (resourceMap[i][j] == null) {
+				} else {
+					System.out.println("i "+i+"j "+j);
 
+					for (long reserveid : resourceMap[i][j].getReserves()) {
+						Reserve reserva = this.getReserve(reserveid);
+						mapBoolean[i][j] = hora.ocupado(reserva);
+						System.out.println(mapBoolean[i][j]);
+					}
+				}
+
+			}
+		}
+
+		return mapBoolean;
+	}
 
 }

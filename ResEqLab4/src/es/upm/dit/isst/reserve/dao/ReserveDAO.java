@@ -25,4 +25,5 @@ public interface ReserveDAO {
 
 	public void update(long id,Calendar start, Calendar end);
 	
+	public boolean[][] mapCheck(Resource[][] ResourceMap, Reserve hora);
 }
