@@ -32,14 +32,6 @@ import es.upm.dit.isst.resource.model.Resource;
 public class ReservarResourceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private void alertHTML(PrintWriter out, String message) throws IOException {
-		out.println("<script type=\"text/javascript\">");
-		out.println("alert('" + message + "');");
-		
-		out.println("</script>");
-
-	}
-
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
 		// /////////////USER////////////////////
@@ -97,7 +89,7 @@ public class ReservarResourceServlet extends HttpServlet {
 			Resource resource = daoresource.getResource(Long
 					.parseLong(resourceId));
 			int sessionTime = Integer.parseInt(req.getParameter("sessionTime"));
-			
+
 			String endhour = starthour;
 
 			// Cambiamos de string al formato de Calendar
@@ -108,37 +100,51 @@ public class ReservarResourceServlet extends HttpServlet {
 			int Sday = Integer.parseInt(startdate.split("-")[2]);
 			int Shour = Integer.parseInt(starthour.split(":")[0]);
 			int Smin = Integer.parseInt(starthour.split(":")[1]);
-			
+
 			int Eyear = Integer.parseInt(enddate.split("-")[0]);
 			int Emonth = Integer.parseInt(enddate.split("-")[1]);
 			int Eday = Integer.parseInt(enddate.split("-")[2]);
-			int Ehour = Integer.parseInt(endhour.split(":")[0] + sessionTime);
+			int Ehour = Integer.parseInt(endhour.split(":")[0]) + sessionTime;
 			int Emin = Integer.parseInt(endhour.split(":")[1]);
+
+			// System.out.println("Start hour: " + Shour + " End hour: " + Ehour
+			// + " SessionTime: " + sessionTime);
 
 			Calendar start = new GregorianCalendar(Syear, Smonth, Sday, Shour,
 					Smin);
 			Calendar end = new GregorianCalendar(Eyear, Emonth, Eday, Ehour,
 					Emin);
-			
 
 			// COMPROBAMOS QUE EL RECURSO NO ESTA OCUPADO EN ESE MOMENTO
 			ReserveDAO reservedao = ReserveDAOImpl.getInstance();
 			List<Reserve> reserves = new ArrayList<Reserve>();
 			reserves = reservedao.getReserves();
+			Reserve reserve2 = new Reserve(start, end, user,
+					Long.parseLong(resourceId));
+			boolean ocupado = false;
 			for (Reserve reserve : reserves) {
-			//TODO:Reserve comprobation
+				// TODO:Reserve comprobation
+				if (reserve.ocupado(reserve2))
+					ocupado = true;
 			}
-
-			///////
-			daoreserve.add(start, end, user, Long.parseLong(resourceId));
+			System.out.println("Esta ocupado?  " + ocupado);
+			// /////
+			if (!ocupado)
+				daoreserve.add(start, end, user, Long.parseLong(resourceId));
 			PrintWriter out = resp.getWriter();
 			try {
-				daoresource.addReserve(Long.parseLong(resourceId), user);
-				//alertHTML(out, "Reservado el recurso " + title + "!!");
-				req.getSession().setAttribute("dialogo", "Reserva realizada!");
-				//System.out.println("llego aqui");
-				resp.sendRedirect("/mandamail?title="+title+"&date="+startdate+"&mishoras="+starthour);
-				
+				if (!ocupado) {
+					daoresource.addReserve(Long.parseLong(resourceId), user);
+					// alertHTML(out, "Reservado el recurso " + title + "!!");
+					req.getSession().setAttribute("dialogo",
+							"Reserva realizada!");
+					// System.out.println("llego aqui");
+					resp.sendRedirect("/mandamail?title=" + title + "&date="
+							+ startdate + "&mishoras=" + starthour);
+				} else {
+					req.getSession().setAttribute("dialogo",
+							"Lo sentimos, esta ocupado a esa hora!");
+				}
 
 			} finally {
 				out.println("<script>location='/reserve';</script>");

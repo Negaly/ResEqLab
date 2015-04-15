@@ -45,7 +45,7 @@ public class EmailConfirmReserveServlet extends HttpServlet {
 			Session session = Session.getDefaultInstance(props, null);
 			Message msg = new MimeMessage(session);
 			msg.setFrom(new InternetAddress(
-					"noreply@testing-isst.appspotmail.com",
+					"noreply@reseqlab.appspotmail.com",
 					"ResEqLab Team"));
 			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(user, user));
 			msg.setSubject("You have done a reserve im ResEqLab");

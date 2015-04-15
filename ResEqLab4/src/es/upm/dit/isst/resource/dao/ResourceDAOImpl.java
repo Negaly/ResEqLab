@@ -35,10 +35,10 @@ public class ResourceDAOImpl implements ResourceDAO {
 	}
 
 	@Override
-	public void add(String title, String description,int sessionTime) {
+	public void add(String title, String description, int sessionTime) {
 		synchronized (this) {
 			EntityManager em = EMFService.get().createEntityManager();
-			Resource resource = new Resource(title, description,sessionTime);
+			Resource resource = new Resource(title, description, sessionTime);
 			em.persist(resource);
 			em.close();
 		}
@@ -71,20 +71,19 @@ public class ResourceDAOImpl implements ResourceDAO {
 		EntityManager em = EMFService.get().createEntityManager();
 		try {
 			Resource resource = em.find(Resource.class, id);
-				if (resource.getReserves().contains(id)) {
-					System.out.println("Recurso ya reservado");
-					
+			// if (resource.getReserves().contains(id)) {
+			// System.out.println("Recurso ya reservado");
 
-				} else {
-					resource.addReserve(id);
-					em.merge(resource);
-					System.out.println("Reservo");
+			// } else {
+			resource.addReserve(id);
+			em.merge(resource);
+			System.out.println("Reservo");
 
-				}
-			
+			// }
+
 		} finally {
 			em.close();
-			System.out.println("LlegueFinally :)" +id);
+			System.out.println("LlegueFinally :)" + id);
 
 		}
 	}
@@ -101,7 +100,8 @@ public class ResourceDAOImpl implements ResourceDAO {
 	}
 
 	@Override
-	public void modifyResource(long resourceId, String title, String description,int sessionTime,boolean available) {
+	public void modifyResource(long resourceId, String title,
+			String description, int sessionTime, boolean available) {
 		EntityManager em = EMFService.get().createEntityManager();
 		try {
 			Resource resource = em.find(Resource.class, resourceId);
@@ -115,46 +115,52 @@ public class ResourceDAOImpl implements ResourceDAO {
 		}
 	}
 
-//	@Override
-//	public boolean proDisp(Resource resource, Resource resource1) {
-//		
-//		
-//		for (Long reserve : resource.getReserves()){
-//			
-//			
-//		}
-//		String sFecha = (startDate.split("  ")[0]);
-//		String sHora = (startDate.split("  ")[1]);
-//		
-//		int sMonth = Integer.parseInt(sFecha.split("-")[0]);
-//		int sDay = Integer.parseInt(sFecha.split("-")[1]);
-//		int sYear = Integer.parseInt(sFecha.split("-")[2]);
-//		
-//		int sHour = Integer.parseInt(sHora.split(":")[0]);
-//		int sMinutes = Integer.parseInt(sHora.split(":")[1]);
-//		
-//		
-//		String eFecha = (startDate.split("  ")[0]);
-//		String eHora = (startDate.split("  ")[1]);
-//		
-//		int eMonth = Integer.parseInt(eFecha.split("-")[0]);
-//		int eDay = Integer.parseInt(eFecha.split("-")[1]);
-//		int eYear = Integer.parseInt(eFecha.split("-")[2]);
-//		
-//		int eHour = Integer.parseInt(eHora.split(":")[0]);
-//		int eMinutes = Integer.parseInt(eHora.split(":")[1]);
-//		
-//		if(sFecha != eFecha){ return true;}
-//		if(sFecha == eFecha){ return false;}
-//		return false;
-//	}
-	
-//	@Override
-//	public boolean dateProbe(int sHour, int sMinutes,int eHour, int eMinutes) {
-//		
-//		if()
-//	
-//		return false;
-//	}
+	@Override
+	public boolean proDisp(String startDate, String endDate, Resource resource) {
+		return false;
+	}
+
+	// @Override
+	// public boolean proDisp(Resource resource, Resource resource1) {
+	//
+	//
+	// for (Long reserve : resource.getReserves()){
+	//
+	//
+	// }
+	// String sFecha = (startDate.split("  ")[0]);
+	// String sHora = (startDate.split("  ")[1]);
+	//
+	// int sMonth = Integer.parseInt(sFecha.split("-")[0]);
+	// int sDay = Integer.parseInt(sFecha.split("-")[1]);
+	// int sYear = Integer.parseInt(sFecha.split("-")[2]);
+	//
+	// int sHour = Integer.parseInt(sHora.split(":")[0]);
+	// int sMinutes = Integer.parseInt(sHora.split(":")[1]);
+	//
+	//
+	// String eFecha = (startDate.split("  ")[0]);
+	// String eHora = (startDate.split("  ")[1]);
+	//
+	// int eMonth = Integer.parseInt(eFecha.split("-")[0]);
+	// int eDay = Integer.parseInt(eFecha.split("-")[1]);
+	// int eYear = Integer.parseInt(eFecha.split("-")[2]);
+	//
+	// int eHour = Integer.parseInt(eHora.split(":")[0]);
+	// int eMinutes = Integer.parseInt(eHora.split(":")[1]);
+	//
+	// if(sFecha != eFecha){ return true;}
+	// if(sFecha == eFecha){ return false;}
+	// return false;
+	// }
+
+	// @Override
+	// public boolean dateProbe(int sHour, int sMinutes,int eHour, int eMinutes)
+	// {
+	//
+	// if()
+	//
+	// return false;
+	// }
 
 }
