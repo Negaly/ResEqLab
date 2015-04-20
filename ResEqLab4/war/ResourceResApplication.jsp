@@ -38,7 +38,8 @@
 				<ul class="nav navbar-nav">
 					<li><a href="/main"><span class="glyphicon glyphicon-home">
 						</span> Home</a></li>
-					<li><a href="/reserve"><span
+						<li><a href="/map"><span class="glyphicon glyphicon-th"> 
+						</span> Map</a></li>					<li><a href="/reserve"><span
 							class="glyphicon glyphicon-tasks"> </span> Reserve</a></li>
 					<c:choose>
 						<c:when test="${userAdmin}">

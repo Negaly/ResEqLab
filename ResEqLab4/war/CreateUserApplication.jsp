@@ -34,7 +34,8 @@
 				<ul class="nav navbar-nav">
 					<li><a href="index.html"><span class="glyphicon glyphicon-home">
 						</span> Home</a></li>
-					<li><a href="/reservar" data-toggle="modal"
+						<li><a href="/map"><span class="glyphicon glyphicon-th"> 
+						</span> Map</a></li>					<li><a href="/reservar" data-toggle="modal"
 						data-target="#myModal"><span class="glyphicon glyphicon-tasks">
 						</span> Reservar</a></li>
 					<c:choose>

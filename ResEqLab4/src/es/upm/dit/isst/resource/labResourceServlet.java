@@ -68,22 +68,22 @@ public class labResourceServlet extends HttpServlet {
 
 			es.upm.dit.isst.lab.model.lab lab = new lab();
 
-			Resource recurso = resourcedao.getResource(Long.parseLong("6192449487634432"));
-			Resource ocupado = new Resource("ocupado", "Esto es un recurso", 3);
+//			Resource recurso = resourcedao.getResource(Long.parseLong("6192449487634432"));
+//			Resource ocupado = new Resource("ocupado", "Esto es un recurso", 3);
 
-			Resource[][] mapaRecursos = {
-					{ recurso, ocupado, null, null, null },
+			String[][] mapa = {
+					{"recurso", "ocupado", null,  "recurso", null },
 					{ null, null, null, null, null },
-					{ null, recurso, null, recurso, null },
-					{ ocupado, null, null, null, null },
-					{ null, null, ocupado, null, ocupado } };
+					{ null,  "recurso", null, "recurso", null },
+					{ "ocupado", null, null, null, null },
+					{ null, null, "ocupado", null, "ocupado" } };
 
 			Calendar start = new GregorianCalendar(2015, 1, 1, 0, 0);
 			Calendar end = new GregorianCalendar(2015, 1, 1, 1, 1);
 
-			Reserve reserva = new Reserve(start, end, "user", recurso.getId());
+//			Reserve reserva = new Reserve(start, end, "user", recurso.getId());
 
-			boolean[][] mapa = reservedao.mapCheck(mapaRecursos, reserva);
+//			boolean[][] mapa = reservedao.mapCheck(mapaRecursos, reserva);
 			// Resource[][] mapa = {{recurso,null,null,null,null},
 			// {null,null,null,null,null},
 			// {null,null,null,null,null},

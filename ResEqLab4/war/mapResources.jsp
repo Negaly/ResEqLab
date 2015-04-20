@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -36,6 +36,8 @@
 				<ul class="nav navbar-nav">
 					<li><a href="/main"><span class="glyphicon glyphicon-home">
 						</span> Home</a></li>
+						<li><a href="/map"><span class="glyphicon glyphicon-th"> 
+						</span> Map</a></li>
 					<li><a href="/reserve"><span
 							class="glyphicon glyphicon-tasks"> </span> Reserve</a></li>
 					<c:choose>
@@ -72,47 +74,98 @@
 			<div style="float: right;"></div>
 		</div>
 	</div>
-	
-	<div class=container>
-	<c:if test="${dialogo != null}">
-	<div class="alert alert-success"  style="width: 100%;">
-    <a href="#" class="close" data-dismiss="alert">&times;</a>
-    <strong>${dialogo}</strong>
-	</div>
-	</c:if>	
-	
-	<script> function reserve(){ 
-				
-		alert("Este recurso no se puede reservar");}
-	
-	</script>
 
-<div class=mapSquare>           
-		<c:forEach var="i" begin="0" end="4">
-			<c:forEach var="j" begin="0" end="4">
-				<c:if test="${mapa[i][j] == 'recurso'}">
-					<a href="/reserve"><img src="/images/silla.png" class=map></img></a>
-				</c:if>	
-				<c:if test="${mapa[i][j] == 'ocupado'}">
-					<img src="/images/silla2.png" class=mapOc onclick="reserve()"></img>
-				</c:if>	
-				<c:if test="${mapa[i][j] == null}">
-					<img src="/images/ladrillo.jpg" class=map></img>
-				</c:if>	
-				
-				<c:if test="${i == 5}">
-					<br>
-				</c:if>	
+	<div class=container>
+		<c:if test="${dialogo != null}">
+			<div class="alert alert-success" style="width: 100%;">
+				<a href="#" class="close" data-dismiss="alert">&times;</a> <strong>${dialogo}</strong>
+			</div>
+		</c:if>
+
+		<script>
+			function reserve() {
+
+				alert("Este recurso no se puede reservar");
+			}
+		</script>
+
+		<div class="izqMap">
+			<table class="table" style="width: 20%;">
+
+				<tr>
+
+					<div class="input-group date">
+
+						<span class="input-group-addon"> <span id="datepick"
+							class="glyphicon glyphicon-calendar"></span>
+
+						</span> <input type="date" class="form-control" id="datepick" name="date">
+
+					</div>
+
+				</tr>
+
+				<tr>
+
+					<td><label for="title">Hora:</label></td>
+
+					<td><select>
+
+							<c:forEach var="i" begin="0" end="23">
+
+								<c:if test="${i <= 9 }">
+
+									<option>0${i}:00</option>
+
+								</c:if>
+
+								<c:if test="${i>9}">
+
+									<option>${i}:00</option>
+
+								</c:if>
+
+							</c:forEach>
+
+					</select></td>
+
+				</tr>
+
+				<tr>
+
+					<td><button type="button">Buscar</button></td>
+
+				</tr>
+			</table>
+		</div>
+
+
+
+
+		<div class=mapSquare>
+			<c:forEach var="i" begin="0" end="4">
+				<c:forEach var="j" begin="0" end="4">
+					<c:if test="${mapa[i][j] == 'recurso'}">
+						<a href="/reserve"><img src="/images/silla.png" class=map></img></a>
+					</c:if>
+					<c:if test="${mapa[i][j] == 'ocupado'}">
+						<img src="/images/silla2.png" class=mapOc onclick="reserve()"></img>
+					</c:if>
+					<c:if test="${mapa[i][j] == null}">
+						<img src="/images/ladrillo.jpg" class=map></img>
+					</c:if>
+
+					<c:if test="${i == 5}">
+						<br>
+					</c:if>
+				</c:forEach>
 			</c:forEach>
-		</c:forEach>
-</div>	
+		</div>
 	</div>
 
 	<hr />
 
-	<footer>
-		
-	</footer>
+	<footer> </footer>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>

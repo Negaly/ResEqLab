@@ -728,6 +728,15 @@ pre code {
 	padding-right: 15px
 }
 
+.izqMap{
+    float: left;
+    width: 200px;
+    height: 90px;
+    margin: 5px;
+	
+}
+
+
 .mapSquare{
     background-color:grey;
     margin-left: auto;
