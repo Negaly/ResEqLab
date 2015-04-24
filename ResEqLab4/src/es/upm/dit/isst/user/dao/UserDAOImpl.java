@@ -46,7 +46,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public List<AppUser> getUsers() {
 		EntityManager em = EMFService.get().createEntityManager();
-		Query q = em.createQuery("select t from User t ");
+		Query q = em.createQuery("select t from AppUser t ");
 		// System.out.println(q.getResultList());
 		// q.setParameter("userId", userId);
 		List<AppUser> users = q.getResultList();

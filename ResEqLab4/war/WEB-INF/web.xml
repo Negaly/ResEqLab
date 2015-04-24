@@ -64,12 +64,19 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>EmailUpdateReserve</servlet-name>
 		<servlet-class>mail.EmailUpdateReserveServlet</servlet-class>
 	</servlet>
-	
-<servlet>
+	<servlet>
 		<servlet-name>paintMap</servlet-name>
 		<servlet-class>es.upm.dit.isst.resource.labResourceServlet</servlet-class>
 	</servlet>
-
+	<servlet>
+		<servlet-name>ShowStats</servlet-name>
+		<servlet-class>es.upm.dit.isst.resource.statsServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ShowStats</servlet-name>
+		<url-pattern>/stats</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>paintMap</servlet-name>
 		<url-pattern>/map</url-pattern>
