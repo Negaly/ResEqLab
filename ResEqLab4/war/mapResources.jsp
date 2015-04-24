@@ -36,7 +36,7 @@
 				<ul class="nav navbar-nav">
 					<li><a href="/main"><span class="glyphicon glyphicon-home">
 						</span> Home</a></li>
-						<li><a href="/map"><span class="glyphicon glyphicon-th"> 
+					<li><a href="/map"><span class="glyphicon glyphicon-th">
 						</span> Map</a></li>
 					<li><a href="/reserve"><span
 							class="glyphicon glyphicon-tasks"> </span> Reserve</a></li>
@@ -89,55 +89,6 @@
 			}
 		</script>
 
-		<div class="izqMap">
-			<table class="table" style="width: 20%;">
-
-				<tr>
-
-					<div class="input-group date">
-
-						<span class="input-group-addon"> <span id="datepick"
-							class="glyphicon glyphicon-calendar"></span>
-
-						</span> <input type="date" class="form-control" id="datepick" name="date">
-
-					</div>
-
-				</tr>
-
-				<tr>
-
-					<td><label for="title">Hora:</label></td>
-
-					<td><select>
-
-							<c:forEach var="i" begin="0" end="23">
-
-								<c:if test="${i <= 9 }">
-
-									<option>0${i}:00</option>
-
-								</c:if>
-
-								<c:if test="${i>9}">
-
-									<option>${i}:00</option>
-
-								</c:if>
-
-							</c:forEach>
-
-					</select></td>
-
-				</tr>
-
-				<tr>
-
-					<td><button type="button">Buscar</button></td>
-
-				</tr>
-			</table>
-		</div>
 
 
 
@@ -145,23 +96,80 @@
 		<div class=mapSquare>
 			<c:forEach var="i" begin="0" end="4">
 				<c:forEach var="j" begin="0" end="4">
-					<c:if test="${mapa[i][j] == 'recurso'}">
+					<c:if test="${mapa[i][j] == 1}">
 						<a href="/reserve"><img src="/images/silla.png" class=map></img></a>
 					</c:if>
-					<c:if test="${mapa[i][j] == 'ocupado'}">
+					<c:if test="${mapa[i][j] == 2}">
 						<img src="/images/silla2.png" class=mapOc onclick="reserve()"></img>
 					</c:if>
-					<c:if test="${mapa[i][j] == null}">
+					<c:if test="${mapa[i][j] == 0}">
 						<img src="/images/ladrillo.jpg" class=map></img>
 					</c:if>
 
-					<c:if test="${i == 5}">
+					<c:if test="${i == 10}">
 						<br>
 					</c:if>
 				</c:forEach>
 			</c:forEach>
 		</div>
 	</div>
+	
+		<div class="izqMap" >
+			<table class="table">
+				<!--  
+				<tr>
+					<div class="input-group date">
+						<span class="input-group-addon"> <span id="datepick"
+							class="glyphicon glyphicon-calendar"></span>
+						</span> <input type="date" class="form-control" id="datepick" name="date">
+					</div>
+				</tr>
+				<tr>
+					<td><label for="title">Hora:</label></td>
+					<td><select>
+							<c:forEach var="i" begin="0" end="23">
+								<c:if test="${i <= 9 }">
+									<option>0${i}:00</option>
+								</c:if>
+								<c:if test="${i>9}">
+									<option>${i}:00</option>
+								</c:if>
+							</c:forEach>
+					</select></td>
+				</tr>
+				<tr>
+					<td><button type="button">Buscar</button></td>
+				</tr>
+				-->
+				<form action="/map" method="get" accept-charset="utf-8">
+
+					<div class="form-group">
+
+						<div class="col-lg-3">
+							<div class="input-group date">
+								<span class="input-group-addon"><span id="datepick"
+									class="glyphicon glyphicon-calendar"></span> </span> <input
+									type="date" class="form-control" id="datepick" name="date">
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-lg-3">
+							<div class="input-group time">
+								<span class="input-group-addon"><span id="datepick"
+									class="glyphicon glyphicon-time"></span> </span> <input type="time"
+									class="form-control" id="mishoras" name="mishoras">
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-lg-3">
+							<input type="submit" class="btn btn-primary" value="Reserve">
+						</div>
+					</div>
+				</form>
+			</table>
+		</div>
 
 	<hr />
 

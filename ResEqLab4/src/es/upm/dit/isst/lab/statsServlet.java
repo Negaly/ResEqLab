@@ -1,4 +1,4 @@
-package es.upm.dit.isst.resource;
+package es.upm.dit.isst.lab;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,23 +27,22 @@ import es.upm.dit.isst.resource.dao.ResourceDAOImpl;
 import es.upm.dit.isst.resource.model.Resource;
 import es.upm.dit.isst.reserve.model.Reserve;
 import es.upm.dit.isst.resource.model.Resource;
+import es.upm.dit.isst.user.dao.UserDAO;
+import es.upm.dit.isst.user.dao.UserDAOImpl;
 
-public class labResourceServlet extends HttpServlet {
+public class statsServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
-
-		// modificariaa esto para que liste las reservas de cada recurso, asi
-		// puedo mostar el nombre del recurso mas facilmente.
-		// /////////////////GESTION USER////////////////////////////////////
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
 		String url = userService.createLoginURL("/createUser");
 		String urlLinktext = "Login";
 		List<Reserve> reserves = null;
 		boolean userAdmin = false;
+		
 		if (user != null) {
 			url = userService.createLogoutURL(req.getRequestURI());
 			urlLinktext = "Logout";
@@ -51,57 +50,59 @@ public class labResourceServlet extends HttpServlet {
 				userAdmin = userService.isUserAdmin();
 			}
 			req.getSession().setAttribute("userAdmin", userAdmin);
+			
 			// ////////////////Gestion Recursos y reservas//////////////////////
 			ResourceDAO resourcedao = ResourceDAOImpl.getInstance();
-
 			ReserveDAO reservedao = ReserveDAOImpl.getInstance();
-
-			// reserves = new ArrayList<Reserve>();
-			// reserves = reservedao.getReserves();
+			UserDAO userdao = UserDAOImpl.getInstance();
 
 			// Si no eres admin, solo ves las tuyas
 			if (!userAdmin && (user != null)) {// LEVEL en vez de admin
 				reserves = reservedao.getReserves(user.getUserId());
 			}
+			
 			// ///////////////Gestion de req y resp////////////////////////////
 			System.out.println(reserves);
 
 			es.upm.dit.isst.lab.model.lab lab = new lab();
-
-//			Resource recurso = resourcedao.getResource(Long.parseLong("6192449487634432"));
-//			Resource ocupado = new Resource("ocupado", "Esto es un recurso", 3);
-
-			String[][] mapa = {
-					{"recurso", "ocupado", null,  "recurso", null },
-					{ null, null, null, null, null },
-					{ null,  "recurso", null, "recurso", null },
-					{ "ocupado", null, null, null, null },
-					{ null, null, "ocupado", null, "ocupado" } };
-
-			Calendar start = new GregorianCalendar(2015, 1, 1, 0, 0);
-			Calendar end = new GregorianCalendar(2015, 1, 1, 1, 1);
-
-//			Reserve reserva = new Reserve(start, end, "user", recurso.getId());
-
-//			boolean[][] mapa = reservedao.mapCheck(mapaRecursos, reserva);
-			// Resource[][] mapa = {{recurso,null,null,null,null},
-			// {null,null,null,null,null},
-			// {null,null,null,null,null},
-			// {null,null,null,null,null},
-			// {null,null,null,null,null}};
 			
-
-			System.out.print(mapa.length);
+			//Calendar start = new GregorianCalendar(Calendar.getInstance(), 1, 1, 0, 0);
+			//Calendar end = new GregorianCalendar(2015, 1, 1, 1, 1);	
+			
+					
+			Reserve reserva = new Reserve(Calendar.getInstance(), Calendar.getInstance(), "user", 23);
+			System.out.println(Calendar.getInstance());
+			//int nVisitas = 2;
+			int nUsuarios = userdao.getUsers().size();
+			int nRecursos = resourcedao.getResources().size();
+			int nReservas = reservedao.getReserves().size();
+			
+			int nOcupadas = 0;
+			
+			for (Resource a: resourcedao.getResources()){
+				for(Long b: a.getReserves()){
+					Reserve reserva2 = reservedao.getReserve(b);
+					if (reserva.ocupado(reserva2))
+						nOcupadas++;
+						
+				}
+			}
+			//hora.ocupado(reserva);
+			////////////////////////////////////////////
+		
+			//req.getSession().setAttribute("nVisitas" , nVisitas);
+			req.getSession().setAttribute("nUsuarios", nUsuarios);
+			req.getSession().setAttribute("nRecursos", nRecursos);
+			req.getSession().setAttribute("nReservas", nReservas);
 			req.getSession().setAttribute("user", user);
-			req.getSession().setAttribute("url", url);
-			req.getSession().setAttribute("urlLinktext", urlLinktext);
-			req.getSession().setAttribute("mapa", mapa);
+
+			req.getSession().setAttribute("nOcupadas", nOcupadas);
 
 			RequestDispatcher view = req
-					.getRequestDispatcher("mapResources.jsp");
+					.getRequestDispatcher("ShowStats.jsp");
 			view.forward(req, resp);
 		} else {
-			resp.sendRedirect("/map");
+			resp.sendRedirect(url);
 		}
 	}
 

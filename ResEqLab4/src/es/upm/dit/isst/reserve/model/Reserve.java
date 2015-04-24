@@ -136,6 +136,8 @@ public class Reserve implements Serializable {
 
 	public boolean ocupado(Reserve reserve2) {
 		// TODO comprobar que funciona bien
+		System.out.println("Mi fecha:  " + this.getStart());
+		System.out.println("Nueva fecha:  " + reserve2.getStart());
 		String mifecha = this.getStart().split(" ")[0];
 		String nuevafecha = reserve2.getStart().split(" ")[0];
 		System.out.println("Mi fecha:  " + mifecha);

@@ -34,8 +34,9 @@
 				<ul class="nav navbar-nav">
 					<li><a href="/main"><span class="glyphicon glyphicon-home">
 						</span> Home</a></li>
-						<li><a href="/map"><span class="glyphicon glyphicon-th"> 
-						</span> Map</a></li>					<li><a href="/reserve"><span
+					<li><a href="/map"><span class="glyphicon glyphicon-th">
+						</span> Map</a></li>
+					<li><a href="/reserve"><span
 							class="glyphicon glyphicon-tasks"> </span> Reserve</a></li>
 					<c:choose>
 						<c:when test="${userAdmin}">
@@ -72,46 +73,63 @@
 	</div>
 
 	<div class="container">
-	
-	<c:if test="${dialogo != null}">
-	<div class="alert alert-success"  style="width: 100%;">
-    <a href="#" class="close" data-dismiss="alert">&times;</a>
-    <strong>${dialogo}</strong>
-	</div>
-	</c:if>
 
-	<table class="table table-striped" align="center">
-		<tr>
-			<th>Start Date</th>
-			<th>End Date</th>
-			<th>User</th>
-			<th>Resource</th>
+		<c:if test="${dialogo != null}">
+			<div class="alert alert-success" style="width: 100%;">
+				<a href="#" class="close" data-dismiss="alert">&times;</a> <strong>${dialogo}</strong>
+			</div>
+		</c:if>
 
-			<c:choose>
-				<c:when test="${userAdmin}">
-					<th>Action</th>
-				</c:when>
-			</c:choose>
-		</tr>
-		<c:forEach items="${reserves}" var="reserve">
+		<table class="table table-striped" align="center">
 			<tr>
-				<td><c:out value="${reserve.start}" /></td>
-				<td><c:out value="${reserve.end}" /></td>
-				<td><c:out value="${reserve.user}" /></td>
-				<td><c:out value="${reserve.resource}" /></td>
+				<th>Start Date</th>
+				<th>End Date</th>
+				<th>User</th>
+				<!--<th>Resource</th>-->
 
 				<c:choose>
-					<c:when test="${user!=null}">
-						<td><a class="btn btn-danger"
-							href="<c:url value="/removeReserve?reserveId=${reserve.id}&datehour=${reserve.start}" />">Remove</a>
-						<a class="btn btn-warning"
-							href="<c:url value="/modifyReserve?reserveId=${reserve.id}" />">Modify</a></td>
+					<c:when test="${userAdmin}">
+						<th>Action</th>
 					</c:when>
 				</c:choose>
-
 			</tr>
-		</c:forEach>
-	</table>
+			<c:forEach items="${resources}" var="resource">
+				<tr>
+					<td><h3>
+							<c:out value="${resource.title}" />
+						</h3></td>
+
+					<c:forEach items="${resource.reserves}" var="reserveid">
+
+						<c:forEach items="${reserves}" var="reserve">
+
+
+							<c:if test="${reserve.id == reserveid}">
+								<tr>
+									<td><c:out value="${reserve.start}" /></td>
+									<td><c:out value="${reserve.end}" /></td>
+									<td><c:out value="${reserve.user}" /></td>
+									<!-- 
+									<td><c:out value="${reserve.resource}" /></td>-->
+
+									<c:choose>
+										<c:when test="${user!=null}">
+											<td><a class="btn btn-danger"
+												href="<c:url value="/removeReserve?reserveId=${reserve.id}&datehour=${reserve.start}&resourceId=${resource.id}"/>">Remove</a>
+												<a class="btn btn-warning"
+												href="<c:url value="/modifyReserve?reserveId=${reserve.id}" />">Modify</a></td>
+										</c:when>
+									</c:choose>
+
+								</tr>
+							</c:if>
+
+						</c:forEach>
+					</c:forEach>
+				</tr>
+			</c:forEach>
+
+		</table>
 
 	</div>
 

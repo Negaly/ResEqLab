@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.google.appengine.labs.repackaged.com.google.common.io.Resources;
 
 import es.upm.dit.isst.reserve.dao.ReserveDAO;
 import es.upm.dit.isst.reserve.dao.ReserveDAOImpl;
@@ -67,18 +68,25 @@ public class ListReserveServlet extends HttpServlet {
 			// ResourceDAO resourcedao = ResourceDAOImpl.getInstance();
 
 			ReserveDAO reservedao = ReserveDAOImpl.getInstance();
+			ResourceDAO resourcedao = ResourceDAOImpl.getInstance();
 
 			reserves = new ArrayList<Reserve>();
 			reserves = reservedao.getReserves();
-
+			List<Resource> resources = null;
 			// Si no eres admin, solo ves las tuyas
 			if (!userAdmin && (user != null)) {// LEVEL en vez de admin
-				reserves = reservedao.getReserves(user.getUserId());
+
 			}
+			resources = resourcedao.getResources();
+
+//			System.out.println(resources);
+//			System.out.println(reserves);
+
 			// ///////////////Gestion de req y resp////////////////////////////
-			System.out.println(reserves);
 
 			req.getSession().setAttribute("user", user);
+			req.getSession().setAttribute("resources",
+					new ArrayList<Resource>(resources));
 			req.getSession().setAttribute("reserves",
 					new ArrayList<Reserve>(reserves));
 			req.getSession().setAttribute("url", url);

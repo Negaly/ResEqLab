@@ -17,7 +17,7 @@ public interface ReserveDAO {
 
 	List<Reserve> getReserves();
 
-	void add(Calendar start, Calendar end, String user, long resource);
+	long add(Calendar start, Calendar end, String user, long resource);
 
 	public List<Reserve> getReserves(String nickname);
 
@@ -25,5 +25,5 @@ public interface ReserveDAO {
 
 	public void update(long id,Calendar start, Calendar end);
 	
-	public boolean[][] mapCheck(Resource[][] ResourceMap, Reserve hora);
+	public int[][] mapCheck(Resource[][] ResourceMap, Reserve hora);
 }

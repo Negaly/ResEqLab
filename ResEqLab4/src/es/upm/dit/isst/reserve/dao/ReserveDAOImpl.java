@@ -35,13 +35,18 @@ public class ReserveDAOImpl implements ReserveDAO {
 	}
 
 	@Override
-	public void add(Calendar start, Calendar end, String user, long resource) {
+	public long add(Calendar start, Calendar end, String user, long resource) {
+		long reserveid;
 		synchronized (this) {
 			EntityManager em = EMFService.get().createEntityManager();
 
 			Reserve reserve = new Reserve(start, end, user, resource);
 			em.persist(reserve);
 			em.close();
+			reserveid = reserve.getId();
+
+			System.out.println(reserveid);
+			return reserveid;
 		}
 
 	}
@@ -111,17 +116,27 @@ public class ReserveDAOImpl implements ReserveDAO {
 	}
 
 	@Override
-	public boolean[][] mapCheck(Resource[][] resourceMap, Reserve hora) {
-		boolean[][] mapBoolean = new boolean[resourceMap[0].length][resourceMap.length];
+	public int[][] mapCheck(Resource[][] resourceMap, Reserve hora) {
+		int[][] mapBoolean = new int[resourceMap[0].length][resourceMap.length];
 		for (int i = 0; i < resourceMap.length; i++) {
-			for (int j = 0; i < resourceMap[0].length; j++) {
+			for (int j = 0; j < resourceMap[0].length; j++) {
 				if (resourceMap[i][j] == null) {
-				} else {
-					System.out.println("i "+i+"j "+j);
+					System.out.println(mapBoolean[i][j]);
+					mapBoolean[i][j] = 0;
 
+				} else {
+					System.out.println("i " + i + "j " + j);
+					mapBoolean[i][j] = 1;
 					for (long reserveid : resourceMap[i][j].getReserves()) {
+						System.out.println(reserveid);
+
 						Reserve reserva = this.getReserve(reserveid);
-						mapBoolean[i][j] = hora.ocupado(reserva);
+						System.out.println(reserva);
+
+						if (hora.ocupado(reserva)) {
+							mapBoolean[i][j] = 2;
+						}
+						// mapBoolean[i][j] = hora.ocupado(reserva);
 						System.out.println(mapBoolean[i][j]);
 					}
 				}

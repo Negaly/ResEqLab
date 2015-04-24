@@ -67,15 +67,17 @@ public class ResourceDAOImpl implements ResourceDAO {
 	}
 
 	@Override
-	public void addReserve(long id, String user) {
+	public void addReserve(long reserveid, String user,long resourceid) {
 		EntityManager em = EMFService.get().createEntityManager();
 		try {
-			Resource resource = em.find(Resource.class, id);
+			Resource resource = em.find(Resource.class, resourceid);
 			// if (resource.getReserves().contains(id)) {
 			// System.out.println("Recurso ya reservado");
 
 			// } else {
-			resource.addReserve(id);
+			System.out.println(reserveid);
+
+			resource.addReserve(reserveid);
 			em.merge(resource);
 			System.out.println("Reservo");
 
@@ -83,7 +85,7 @@ public class ResourceDAOImpl implements ResourceDAO {
 
 		} finally {
 			em.close();
-			System.out.println("LlegueFinally :)" + id);
+			System.out.println("LlegueFinally :)" + reserveid);
 
 		}
 	}
@@ -118,6 +120,19 @@ public class ResourceDAOImpl implements ResourceDAO {
 	@Override
 	public boolean proDisp(String startDate, String endDate, Resource resource) {
 		return false;
+	}
+
+	@Override
+	public void removeReserve(String reserveId, String resourceId) {
+			EntityManager em = EMFService.get().createEntityManager();
+		try {
+			Resource resource = em.find(Resource.class, Long.parseLong(resourceId));
+			resource.removeReserve(reserveId);
+			em.merge(resource);
+		} finally {
+			em.close();
+		}
+		
 	}
 
 	// @Override

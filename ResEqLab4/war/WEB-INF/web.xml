@@ -66,11 +66,11 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	</servlet>
 	<servlet>
 		<servlet-name>paintMap</servlet-name>
-		<servlet-class>es.upm.dit.isst.resource.labResourceServlet</servlet-class>
+		<servlet-class>es.upm.dit.isst.lab.labResourceServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>ShowStats</servlet-name>
-		<servlet-class>es.upm.dit.isst.resource.statsServlet</servlet-class>
+		<servlet-class>es.upm.dit.isst.lab.statsServlet</servlet-class>
 	</servlet>
 	
 	<servlet-mapping>

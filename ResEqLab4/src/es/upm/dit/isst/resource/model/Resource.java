@@ -72,6 +72,10 @@ public class Resource implements Serializable {
 		this.available = available;
 	}
 
+	public void removeReserve(String reserveId) {
+		reserves.remove(reserveId);
+	}
+
 
 
 } 

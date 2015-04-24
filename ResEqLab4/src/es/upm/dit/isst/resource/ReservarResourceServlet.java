@@ -76,6 +76,7 @@ public class ReservarResourceServlet extends HttpServlet {
 			throws IOException {
 		UserService userService = UserServiceFactory.getUserService();
 		String user = userService.getCurrentUser().getNickname();
+		long reserveid = 0;
 
 		if (user != null) {// ///LEVEL/////
 			ResourceDAO daoresource = ResourceDAOImpl.getInstance();
@@ -122,19 +123,30 @@ public class ReservarResourceServlet extends HttpServlet {
 			Reserve reserve2 = new Reserve(start, end, user,
 					Long.parseLong(resourceId));
 			boolean ocupado = false;
-			for (Reserve reserve : reserves) {
+			for (long reservesId : daoresource.getResource(
+					Long.parseLong(resourceId)).getReserves()) {
 				// TODO:Reserve comprobation
+				Reserve reserve = reservedao.getReserve(reservesId);
+				System.out.println("reserveId" + reservesId + "ResourceID"
+						+ resourceId + "Reserve2" + reserve2);
 				if (reserve.ocupado(reserve2))
 					ocupado = true;
 			}
 			System.out.println("Esta ocupado?  " + ocupado);
 			// /////
+
 			if (!ocupado)
-				daoreserve.add(start, end, user, Long.parseLong(resourceId));
+				reserveid = daoreserve.add(start, end, user,
+						Long.parseLong(resourceId));
+			System.out.println(reserveid);
+
 			PrintWriter out = resp.getWriter();
 			try {
 				if (!ocupado) {
-					daoresource.addReserve(Long.parseLong(resourceId), user);
+					System.out.println(reserveid);
+
+					daoresource.addReserve(reserveid, user,
+							Long.parseLong(resourceId));
 					// alertHTML(out, "Reservado el recurso " + title + "!!");
 					req.getSession().setAttribute("dialogo",
 							"Reserva realizada!");
