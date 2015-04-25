@@ -100,39 +100,35 @@ public class Reserve implements Serializable {
 		String month;
 		String hour;
 		String minute;
-		
-		if(calendar.get(Calendar.MONTH) <= 9){
-			 month= "0" + calendar.get(Calendar.MONTH);			
-		}else{
-			 month= ""+ calendar.get(Calendar.MONTH);			
-		}
-		
-		if(calendar.get(Calendar.DAY_OF_MONTH) <= 9){
-			 day= "0" + calendar.get(Calendar.DAY_OF_MONTH);			
-		}else{
-			 day= "" + calendar.get(Calendar.DAY_OF_MONTH);			
-		}
-		
-		if(calendar.get(Calendar.HOUR) <= 9){
-			 hour= "0" + calendar.get(Calendar.HOUR);			
-		}else{
-			 hour= "" + calendar.get(Calendar.HOUR);			
-		}		
 
-		if(calendar.get(Calendar.MINUTE) <= 9){
-			 minute= "0" + calendar.get(Calendar.MINUTE);			
-		}else{
-			 minute= "" + calendar.get(Calendar.MINUTE);			
-		}	
-		
-		String date = month + "-" +
-			 	  	  day + "-" +
-				 	  calendar.get(Calendar.YEAR) + "   " +
-				 	  hour + ":" +
-				 	  minute;
+		if (calendar.get(Calendar.MONTH) <= 9) {
+			month = "0" + calendar.get(Calendar.MONTH);
+		} else {
+			month = "" + calendar.get(Calendar.MONTH);
+		}
+
+		if (calendar.get(Calendar.DAY_OF_MONTH) <= 9) {
+			day = "0" + calendar.get(Calendar.DAY_OF_MONTH);
+		} else {
+			day = "" + calendar.get(Calendar.DAY_OF_MONTH);
+		}
+
+		if (calendar.get(Calendar.HOUR) <= 9) {
+			hour = "0" + calendar.get(Calendar.HOUR);
+		} else {
+			hour = "" + calendar.get(Calendar.HOUR);
+		}
+
+		if (calendar.get(Calendar.MINUTE) <= 9) {
+			minute = "0" + calendar.get(Calendar.MINUTE);
+		} else {
+			minute = "" + calendar.get(Calendar.MINUTE);
+		}
+
+		String date = month + "-" + day + "-" + calendar.get(Calendar.YEAR)
+				+ "   " + hour + ":" + minute;
 		return date;
 	}
-	
 
 	public boolean ocupado(Reserve reserve2) {
 		// TODO comprobar que funciona bien

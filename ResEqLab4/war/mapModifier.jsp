@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
@@ -68,10 +70,11 @@
 	<div style="width: 100%;">
 		<div class="line"></div>
 		<div class="topLine">
-			<h1 style="text-align: center">Resources</h1>
+			<h1 style="text-align: center">Maps</h1>
 			<div style="float: right;"></div>
 		</div>
 	</div>
+
 	<div class=container>
 		<c:if test="${dialogo != null}">
 			<div class="alert alert-success" style="width: 100%;">
@@ -79,48 +82,44 @@
 			</div>
 		</c:if>
 
-		<table class="table table-striped" style="width: 60%;" align="center">
-			<tr>
-				<th>Title</th>
-				<th>Description</th>
-				<c:choose>
-					<c:when test="${userAdmin}">
-						<th>Action</th>
-						<th></th>
-					</c:when>
-				</c:choose>
-			</tr>
+		<script>
+			function reserve() {
 
-			<c:forEach items="${resources}" var="resource">
-				<tr>
-					<td><c:out value="${resource.title}" /></td>
-					<td><c:out value="${resource.description}" /></td>
-					<c:choose>
-						<c:when test="${userAdmin}">
-							<td><a class="btn btn-danger"
-								href="<c:url value="/remove?id=${resource.id}" />">Remove</a></td>
-							<td><a class="btn btn-warning"
-								href="<c:url value="/modifyResource?resourceId=${resource.id}" />">Modify</a></td>
-							<td><a class="btn btn-primary"
-								href="<c:url value="/placeResource?resourceId=${resource.id}" />">Place</a></td>
-						</c:when>
-					</c:choose>
+				alert("Este recurso no se puede reservar");
+			}
+		</script>
 
-				</tr>
+
+
+
+
+		<div class=mapSquare>
+			<c:forEach var="i" begin="0" end="4">
+				<c:forEach var="j" begin="0" end="4">
+					<c:if test="${mapa[i][j] == 1}">
+						<a href="/reserve"><img src="/images/silla.png" class=map></img></a>
+					</c:if>
+					<c:if test="${mapa[i][j] == 2}">
+						<img src="/images/silla2.png" class=mapOc onclick="reserve()"></img>
+					</c:if>
+					<c:if test="${mapa[i][j] == 0}">
+						<a href="/placeResource?x=${i}&y=${j}&resourceId=${resourceID}"><img
+							src="/images/ladrillo.jpg" class=map></img></a>
+					</c:if>
+
+					<c:if test="${i == 10}">
+						<br>
+					</c:if>
+				</c:forEach>
 			</c:forEach>
-		</table>
-
+		</div>
 	</div>
+
+
 
 	<hr />
 
-	<footer>
-		<h6 small>
-			You have a total number of
-			<c:out value="${fn:length(resources)}" />
-			Resources.
-		</h6>
-	</footer>
+	<footer> </footer>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>

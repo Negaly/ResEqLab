@@ -25,41 +25,43 @@ public class MainServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
+
 		ResourceDAO dao = ResourceDAOImpl.getInstance();
 
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
-		
+
 		String url = userService.createLoginURL("/createUser");
 		String urlLinktext = "Login";
 		List<Resource> resources = new ArrayList<Resource>();
-		boolean userAdmin= false;
-		if (userService.isUserLoggedIn()){
+		boolean userAdmin = false;
+		if (userService.isUserLoggedIn()) {
 			userAdmin = userService.isUserAdmin();
 		}
-	    req.getSession().setAttribute("userAdmin", userAdmin);
-     
+		req.getSession().setAttribute("userAdmin", userAdmin);
+
 		System.out.println(userAdmin);
 
-		if (user != null){
-		//if (true){
+		if (user != null) {
+			// if (true){
 			System.out.println(user);
-		    url = userService.createLogoutURL(req.getRequestURI());
-		    urlLinktext = "Logout";
+			url = userService.createLogoutURL(req.getRequestURI());
+			urlLinktext = "Logout";
 		}
-	    resources = dao.getResources();
-		
+		resources = dao.getResources();
+
 		req.getSession().setAttribute("user", user);
-		req.getSession().setAttribute("resources", new ArrayList<Resource>(resources));
+		req.getSession().setAttribute("resources",
+				new ArrayList<Resource>(resources));
 		req.getSession().setAttribute("url", url);
 		req.getSession().setAttribute("urlLinktext", urlLinktext);
-//		List<Strint> list = resource
-//		for(int i=0; i<list.size();i++){
-//		System.out.println(list.get(i));
-//		}
-		RequestDispatcher view = req.getRequestDispatcher("ResourceApplication.jsp");
-        view.forward(req, resp);
-		
-	}
+		// List<Strint> list = resource
+		// for(int i=0; i<list.size();i++){
+		// System.out.println(list.get(i));
+		// }
+		RequestDispatcher view = req
+				.getRequestDispatcher("ResourceApplication.jsp");
+		view.forward(req, resp);
 
+	}
 }

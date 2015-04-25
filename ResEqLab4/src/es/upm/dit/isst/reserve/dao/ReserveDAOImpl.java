@@ -121,23 +121,23 @@ public class ReserveDAOImpl implements ReserveDAO {
 		for (int i = 0; i < resourceMap.length; i++) {
 			for (int j = 0; j < resourceMap[0].length; j++) {
 				if (resourceMap[i][j] == null) {
-					System.out.println(mapBoolean[i][j]);
+					// System.out.println(mapBoolean[i][j]);
 					mapBoolean[i][j] = 0;
 
 				} else {
 					System.out.println("i " + i + "j " + j);
 					mapBoolean[i][j] = 1;
 					for (long reserveid : resourceMap[i][j].getReserves()) {
-						System.out.println(reserveid);
+						// System.out.println(reserveid);
 
 						Reserve reserva = this.getReserve(reserveid);
-						System.out.println(reserva);
+						// System.out.println(reserva);
 
 						if (hora.ocupado(reserva)) {
 							mapBoolean[i][j] = 2;
 						}
 						// mapBoolean[i][j] = hora.ocupado(reserva);
-						System.out.println(mapBoolean[i][j]);
+						// System.out.println(mapBoolean[i][j]);
 					}
 				}
 

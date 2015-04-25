@@ -14,19 +14,21 @@ public interface LabDAO {
 
 	public lab getLab();
 
-//	public void remove(long id);
-//
-//	List<Reserve> listReserves();
-//
-//	List<Reserve> getReserves();
-//
-//	void add(Calendar start, Calendar end, String user, long resource);
-//
-//	public List<Reserve> getReserves(String nickname);
-//
-//	public Reserve getReserve(long parseLong);
-//
-//	public void update(long id,Calendar start, Calendar end);
-//	
-//	public boolean[][] mapCheck(Resource[][] ResourceMap, Reserve hora);
+	public void addResourcePos(int parseInt, int parseInt2, Resource resource);
+
+	// public void remove(long id);
+	//
+	// List<Reserve> listReserves();
+	//
+	// List<Reserve> getReserves();
+	//
+	// void add(Calendar start, Calendar end, String user, long resource);
+	//
+	// public List<Reserve> getReserves(String nickname);
+	//
+	// public Reserve getReserve(long parseLong);
+	//
+	// public void update(long id,Calendar start, Calendar end);
+	//
+	// public boolean[][] mapCheck(Resource[][] ResourceMap, Reserve hora);
 }
