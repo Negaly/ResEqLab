@@ -44,6 +44,9 @@
 									class="glyphicon glyphicon-pencil"></span> Create</a></li>
 							<li><a href="/listReserves"><span
 									class="glyphicon glyphicon-tasks"></span> Reserves</a></li>
+							<li><a href="/stats"> <span
+									class="glyphicon glyphicon-tasks"></span> Statistics
+							</a></li>
 						</c:when>
 					</c:choose>
 				</ul>

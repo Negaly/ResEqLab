@@ -46,6 +46,9 @@
 									class="glyphicon glyphicon-pencil"></span> Create</a></li>
 							<li><a href="/listReserves"><span
 									class="glyphicon glyphicon-tasks"></span> Reserves</a></li>
+							<li><a href="/stats"> <span
+									class="glyphicon glyphicon-tasks"></span> Statistics
+							</a></li>
 						</c:when>
 					</c:choose>
 
@@ -113,10 +116,10 @@
 			</c:forEach>
 		</div>
 	</div>
-	
-		<div class="izqMap" >
-			<table class="table">
-				<!--  
+
+	<div class="izqMap">
+		<table class="table">
+			<!--  
 				<tr>
 					<div class="input-group date">
 						<span class="input-group-addon"> <span id="datepick"
@@ -141,35 +144,35 @@
 					<td><button type="button">Buscar</button></td>
 				</tr>
 				-->
-				<form action="/map" method="get" accept-charset="utf-8">
+			<form action="/map" method="get" accept-charset="utf-8">
 
-					<div class="form-group">
+				<div class="form-group">
 
-						<div class="col-lg-3">
-							<div class="input-group date">
-								<span class="input-group-addon"><span id="datepick"
-									class="glyphicon glyphicon-calendar"></span> </span> <input
-									type="date" class="form-control" id="datepick" name="date">
-							</div>
+					<div class="col-lg-3">
+						<div class="input-group date">
+							<span class="input-group-addon"><span id="datepick"
+								class="glyphicon glyphicon-calendar"></span> </span> <input type="date"
+								class="form-control" id="datepick" name="date">
 						</div>
 					</div>
-					<div class="form-group">
-						<div class="col-lg-3">
-							<div class="input-group time">
-								<span class="input-group-addon"><span id="datepick"
-									class="glyphicon glyphicon-time"></span> </span> <input type="time"
-									class="form-control" id="mishoras" name="mishoras">
-							</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-3">
+						<div class="input-group time">
+							<span class="input-group-addon"><span id="datepick"
+								class="glyphicon glyphicon-time"></span> </span> <input type="time"
+								class="form-control" id="mishoras" name="mishoras">
 						</div>
 					</div>
-					<div class="form-group">
-						<div class="col-lg-3">
-							<input type="submit" class="btn btn-primary" value="Reserve">
-						</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-3">
+						<input type="submit" class="btn btn-primary" value="Reserve">
 					</div>
-				</form>
-			</table>
-		</div>
+				</div>
+			</form>
+		</table>
+	</div>
 
 	<hr />
 

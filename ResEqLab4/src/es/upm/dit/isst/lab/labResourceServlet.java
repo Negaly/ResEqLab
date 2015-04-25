@@ -110,9 +110,28 @@ public class labResourceServlet extends HttpServlet {
 			Reserve reserva = new Reserve(start, end, "user", 26);
 			Resource[][] map = labdao.getLab().getMapa();
 			map[0][0] = recurso;
+
+
+			// /////////
+			for (int i = 0; i < map.length; i++) {
+				for (int j = 0; j < map[0].length; j++) {
+					try {
+						map[i][j] = resourcedao.getResource(labdao
+								.getLab()
+								.getMapaIDs()
+								.get(Integer.parseInt(Integer.toString(i)
+										+ Integer.toString(j))));
+						System.out.println(map[i][j].getTitle());
+					} catch (Exception e) {
+						map[i][j] = null;
+					} finally {
+					}
+
+				}
+			}
 			int[][] mapa = reservedao.mapCheck(map, reserva);
 
-			System.out.print(mapa.length);
+			// ///////
 			req.getSession().setAttribute("user", user);
 			req.getSession().setAttribute("url", url);
 			req.getSession().setAttribute("urlLinktext", urlLinktext);

@@ -23,10 +23,9 @@
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
 					data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span> 
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
 				</button>
 			</div>
 
@@ -34,35 +33,38 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="/main">
-						<span class="glyphicon glyphicon-home"></span> Home</a></li>
-					<li><a href="/map">
-						<span class="glyphicon glyphicon-th"></span> Map</a></li>
-					<li><a href="/reserve">
-						<span class="glyphicon glyphicon-tasks"> </span> Reserve</a></li>
+					<li><a href="/main"> <span
+							class="glyphicon glyphicon-home"></span> Home
+					</a></li>
+					<li><a href="/map"> <span class="glyphicon glyphicon-th"></span>
+							Map
+					</a></li>
+					<li><a href="/reserve"> <span
+							class="glyphicon glyphicon-tasks"> </span> Reserve
+					</a></li>
 					<c:choose>
 						<c:when test="${userAdmin}">
 							<li><a href="/create"><span
 									class="glyphicon glyphicon-pencil"></span> Create</a></li>
 							<li><a href="/listReserves"><span
 									class="glyphicon glyphicon-tasks"></span> Reserves</a></li>
-							<li><a href="/stats">
-								<span class="glyphicon glyphicon-object-align-bottom"></span> Statistics</a></li>
+							<li><a href="/stats"> <span
+									class="glyphicon glyphicon-tasks"></span> Statistics
+							</a></li>
 							<!-- Si no gusta glyphicon-object-align-bottom, poner  glyphicon-wrench o glyphicon-tasks o glyphicon-signal-->
 						</c:when>
 					</c:choose>
 
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li class="active"><a href="<c:url value="${url}"/>">
-					 <c:choose>
-						<c:when test="${user != null}">
-							<span class="glyphicon glyphicon-off"> </span>
-						</c:when>
-						<c:otherwise>
-							<span class="glyphicon glyphicon-user"> </span>
-						</c:otherwise>
-					</c:choose> <c:out value="${urlLinktext}" /></a></li>
+					<li class="active"><a href="<c:url value="${url}"/>"> <c:choose>
+								<c:when test="${user != null}">
+									<span class="glyphicon glyphicon-off"> </span>
+								</c:when>
+								<c:otherwise>
+									<span class="glyphicon glyphicon-user"> </span>
+								</c:otherwise>
+							</c:choose> <c:out value="${urlLinktext}" /></a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -86,7 +88,8 @@
 			</div>
 		</c:if>
 
-		<div style="padding: 10px; float: left; width: 35%; text-align: justify;">
+		<div
+			style="padding: 10px; float: left; width: 35%; text-align: justify;">
 			<table class="table">
 				<!-- 
 				<tr>
@@ -110,8 +113,8 @@
 					<td><label for="title">Usuario actual:</label></td>
 					<td>${user}</td>
 				</tr>
-				
-								<tr>
+
+				<tr>
 					<td><label for="title">Número de Libres:</label></td>
 					<td>${nRecursos - nOcupadas}</td>
 				</tr>
@@ -121,54 +124,38 @@
 				</tr>
 			</table>
 			<div id="GraficoGoogleChart-4" style="width: 400px; height: 300px"></div>
-			
+
 		</div>
-		<div style="padding: 10px; float: right; width: 65%; text-align: justify;">
-			<div id="GraficoGoogleChart-1" style="width: 700px; height: 400px"></div>
+		<div
+			style="padding: 10px; float: right; width: 65%; text-align: justify;">
+
 			<div id="GraficoGoogleChart-2" style="width: 700px; height: 500px"></div>
-			<div id="GraficoGoogleChart-3" style="width: 700px; height: 500px"></div>
+
 			<div id="GraficoGoogleChart-4" style="width: 700px; height: 500px"></div>
 
 		</div>
 	</div>
 
 	<footer> </footer>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 
-	<script type="text/javascript" src="https://www.google.com/jsapi"></script> 
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	<script>
 	   google.load("visualization", "1", {packages:["corechart"]});
 	   google.setOnLoadCallback(dibujarGrafico);
 	   function dibujarGrafico() {
-		   
-		   
-		 //--Grafico 1--
-	     // Tabla de datos: valores y etiquetas de la gráfica
-	     var data1 = google.visualization.arrayToDataTable([
-	       ['Día','Nº Reservas'],
-	       ['Lunes', 4],
-	       ['Martes', 6],
-	       ['Miércoles', 5],
-	       ['Jueves', 1],
-	       ['Viernes', 8]    
-	     ]);
-	     var options1 = {
-	       title: 'Número de Reservas de esta semana por día',
-           legend: 'none',
-           vAxis: { gridlines: { count: 10 } }
-	       //is3D: true
-	     }
 	     
 		 //--Grafico 2--
 	     // Tabla de datos: valores y etiquetas de la gráfica
 	     var data2 = google.visualization.arrayToDataTable([
 	       ['Día','Nº Reservas'],
-	       ['Lunes', 4],
-	       ['Martes', 6],
-	       ['Miércoles', 5],
-	       ['Jueves', 1],
-	       ['Viernes', 8]    
+	       ['Lunes', ${nResMonday}],
+	       ['Martes', ${nResThuesday}],
+	       ['Miércoles', ${nResWednesday}],
+	       ['Jueves', ${nResThursday}],
+	       ['Viernes', ${nResFriday}]    
 	     ]);
 	     var options2 = {
 	       title: 'Número de Reservas de esta semana por día',
@@ -176,24 +163,7 @@
            vAxis: { gridlines: { count: 10 } }
 	       //is3D: true
 	     }
-	     
-		 //--Grafico 3--
-	     // Tabla de datos: valores y etiquetas de la gráfica
-	     var data3 = google.visualization.arrayToDataTable([
-	       ['Día','Nº Reservas'],
-	       ['Lunes', 4],
-	       ['Martes', 6],
-	       ['Miércoles', 5],
-	       ['Jueves', 1],
-	       ['Viernes', 8]    
-	     ]);
-	     var options3 = {
-	       title: 'Número de Reservas de esta semana por día',
-           legend: 'none',
-           vAxis: { gridlines: { count: 10 } }
-	       //is3D: true
-	     }
-	     
+	          
 		 //--Grafico 4-- Porcentaje de reservas hoy
 	     // Tabla de datos: valores y etiquetas de la gráfica
 	     var data4 = google.visualization.arrayToDataTable([
@@ -210,18 +180,12 @@
 	       //is3D: true
 	     }
 	     // Dibujar el gráfico
-	     new google.visualization.ColumnChart( 
-		     //ColumnChart sería el tipo de gráfico a dibujar
-		       document.getElementById('GraficoGoogleChart-1')
-		     ).draw(data1, options1);
+
 	     new google.visualization.ColumnChart( 
 	   	     //ColumnChart sería el tipo de gráfico a dibujar
 	   	       document.getElementById('GraficoGoogleChart-2')
 	   	     ).draw(data2, options2);
-	     new google.visualization.ColumnChart( 
-    	     //ColumnChart sería el tipo de gráfico a dibujar
-    	       document.getElementById('GraficoGoogleChart-3')
-    	     ).draw(data3, options3);
+
 	     new google.visualization.PieChart( 
     	     //ColumnChart sería el tipo de gráfico a dibujar
     	       document.getElementById('GraficoGoogleChart-4')

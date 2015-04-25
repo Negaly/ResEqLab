@@ -32,8 +32,9 @@
 				<ul class="nav navbar-nav">
 					<li><a href="/main"><span class="glyphicon glyphicon-home">
 						</span> Home</a></li>
-						<li><a href="/map"><span class="glyphicon glyphicon-th"> 
-						</span> Map</a></li>					<li><a href="/reserve"><span
+					<li><a href="/map"><span class="glyphicon glyphicon-th">
+						</span> Map</a></li>
+					<li><a href="/reserve"><span
 							class="glyphicon glyphicon-tasks"> </span> Reserve</a></li>
 					<c:choose>
 						<c:when test="${userAdmin}">
@@ -41,6 +42,9 @@
 									class="glyphicon glyphicon-pencil"></span> Create</a></li>
 							<li><a href="/listReserves"><span
 									class="glyphicon glyphicon-tasks"></span> Reserves</a></li>
+							<li><a href="/stats"> <span
+									class="glyphicon glyphicon-tasks"></span> Statistics
+							</a></li>
 						</c:when>
 					</c:choose>
 
@@ -70,38 +74,38 @@
 		</div>
 	</div>
 	<div class="container">
-	<c:if test="${dialogo != null}">
-	<div class="alert alert-success"  style="width: 100%;">
-    <a href="#" class="close" data-dismiss="alert">&times;</a>
-    <strong>${dialogo}</strong>
-	</div>
-	</c:if>
-	
-	<form action="/new" method="post" accept-charset="utf-8">
-		<table class="table" style="width: 60%;" align="center">
-			<tr>
-				<td><label for="title">Title</label></td>
-				<td><input class="form-control" type="text" name="title" id="title" size="65" /></td>
-			</tr>
-			<tr>
-				<td valign="description"><label for="description">Description</label></td>
-				<td><textarea class="form-control" rows="4" cols="50" name="description"
-						id="description"></textarea></td>
-			</tr>
-			<tr>
-				<td valign="sessionTime"><label for="sessionTime">Session
-						Time</label></td>
-				<td><input class="form-control" type="number" name="sessionTime" id="sessionTime"
-					min="1" max="5"></td>
-			</tr>
+		<c:if test="${dialogo != null}">
+			<div class="alert alert-success" style="width: 100%;">
+				<a href="#" class="close" data-dismiss="alert">&times;</a> <strong>${dialogo}</strong>
+			</div>
+		</c:if>
 
-			<tr>
-				<td colspan="2" align="right"><input type="submit" class="btn btn-default"
-					value="Create" /></td>
-			</tr>
-		</table>
-	</form>
-	
+		<form action="/new" method="post" accept-charset="utf-8">
+			<table class="table" style="width: 60%;" align="center">
+				<tr>
+					<td><label for="title">Title</label></td>
+					<td><input class="form-control" type="text" name="title"
+						id="title" size="65" /></td>
+				</tr>
+				<tr>
+					<td valign="description"><label for="description">Description</label></td>
+					<td><textarea class="form-control" rows="4" cols="50"
+							name="description" id="description"></textarea></td>
+				</tr>
+				<tr>
+					<td valign="sessionTime"><label for="sessionTime">Session
+							Time</label></td>
+					<td><input class="form-control" type="number"
+						name="sessionTime" id="sessionTime" min="1" max="5"></td>
+				</tr>
+
+				<tr>
+					<td colspan="2" align="right"><input type="submit"
+						class="btn btn-default" value="Create" /></td>
+				</tr>
+			</table>
+		</form>
+
 	</div>
 	<script src="js/bootstrap.min.js"></script>
 </body>

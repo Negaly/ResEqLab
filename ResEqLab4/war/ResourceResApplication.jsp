@@ -38,8 +38,9 @@
 				<ul class="nav navbar-nav">
 					<li><a href="/main"><span class="glyphicon glyphicon-home">
 						</span> Home</a></li>
-						<li><a href="/map"><span class="glyphicon glyphicon-th"> 
-						</span> Map</a></li>					<li><a href="/reserve"><span
+					<li><a href="/map"><span class="glyphicon glyphicon-th">
+						</span> Map</a></li>
+					<li><a href="/reserve"><span
 							class="glyphicon glyphicon-tasks"> </span> Reserve</a></li>
 					<c:choose>
 						<c:when test="${userAdmin}">
@@ -47,6 +48,9 @@
 									class="glyphicon glyphicon-pencil"></span> Create</a></li>
 							<li><a href="/listReserves"><span
 									class="glyphicon glyphicon-tasks"></span> Reserves</a></li>
+							<li><a href="/stats"> <span
+									class="glyphicon glyphicon-tasks"></span> Statistics
+							</a></li>
 						</c:when>
 					</c:choose>
 
@@ -77,79 +81,81 @@
 	</div>
 
 	<div class="container">
-	<c:if test="${dialogo != null}">
-	<div class="alert alert-success"  style="width: 100%;">
-    <a href="#" class="close" data-dismiss="alert">&times;</a>
-    <strong>${dialogo}</strong>
-	</div>
-	</c:if>
+		<c:if test="${dialogo != null}">
+			<div class="alert alert-success" style="width: 100%;">
+				<a href="#" class="close" data-dismiss="alert">&times;</a> <strong>${dialogo}</strong>
+			</div>
+		</c:if>
 
-	<table class="table table-striped"  align="center">
-	<thead>
-		<tr>
-			<th>Title</th>
-			<th>Description</th>
-			<c:choose>
-				<c:when test="${user != null}">
-					<th>Action</th>
-				</c:when>
-			</c:choose>
-		</tr>
-	</thead>
-	<tbody>
-		<c:forEach items="${resources}" var="resource">
-			<c:choose>
-				<c:when test="${resource.available}">
-					<tr>
-						<td><c:out value="${resource.title}" /></td>
-						<td><c:out value="${resource.description}" /></td>
-						<c:if test="${user != null}">
-							<td>
-								<form
-									action="/reserve?id=${resource.id}&title=${resource.title}"
-									method="post" accept-charset="utf-8">
-									<div class="form-group">
+		<table class="table table-striped" align="center">
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Description</th>
+					<c:choose>
+						<c:when test="${user != null}">
+							<th>Action</th>
+						</c:when>
+					</c:choose>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${resources}" var="resource">
+					<c:choose>
+						<c:when test="${resource.available}">
+							<tr>
+								<td><c:out value="${resource.title}" /></td>
+								<td><c:out value="${resource.description}" /></td>
+								<c:if test="${user != null}">
+									<td>
+										<form
+											action="/reserve?id=${resource.id}&title=${resource.title}"
+											method="post" accept-charset="utf-8">
+											<div class="form-group">
 
-										<div class="col-lg-3">
-											<div class="input-group date">
-												<span class="input-group-addon"><span id="datepick"
-													class="glyphicon glyphicon-calendar"></span> </span> <input
-													type="date" class="form-control" id="datepick" name="date">
+												<div class="col-lg-3">
+													<div class="input-group date">
+														<span class="input-group-addon"><span id="datepick"
+															class="glyphicon glyphicon-calendar"></span> </span> <input
+															type="date" class="form-control" id="datepick"
+															name="date">
+													</div>
+												</div>
 											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-lg-3">
-											<div class="input-group time">
-												<span class="input-group-addon"><span id="datepick"
-													class="glyphicon glyphicon-time"></span> </span> <input
-													type="time" class="form-control" id="mishoras"
-													name="mishoras">
+											<div class="form-group">
+												<div class="col-lg-3">
+													<div class="input-group time">
+														<span class="input-group-addon"><span id="datepick"
+															class="glyphicon glyphicon-time"></span> </span> <input
+															type="time" class="form-control" id="mishoras"
+															name="mishoras">
+													</div>
+												</div>
 											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-lg-3">
-											<input placeholder="Enter your session time" type="number" class="form-control" name="sessionTime" id="sessionTime"
-												min="1" max="${resource.sessionTime}">
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-lg-3">	
-										<input type="submit" class="btn btn-primary" value="Reserve">
-										</div>
-									</div>
-								</form>
-							</td>
-						</c:if>
+											<div class="form-group">
+												<div class="col-lg-3">
+													<input placeholder="Enter your session time" type="number"
+														class="form-control" name="sessionTime" id="sessionTime"
+														min="1" max="${resource.sessionTime}">
+												</div>
+											</div>
+											<div class="form-group">
+												<div class="col-lg-3">
+													<input type="submit" class="btn btn-primary"
+														value="Reserve">
+												</div>
+											</div>
+										</form>
+									</td>
+								</c:if>
 
-					</tr>
-				</c:when>
-			</c:choose>
-		</c:forEach>
-		</tbody>
-	</table>
-	
+							</tr>
+						</c:when>
+					</c:choose>
+				</c:forEach>
+			</tbody>
+		</table>
+
 
 	</div>
 

@@ -37,8 +37,9 @@
 				<ul class="nav navbar-nav">
 					<li><a href="/main"><span class="glyphicon glyphicon-home">
 						</span> Home</a></li>
-						<li><a href="/map"><span class="glyphicon glyphicon-th"> 
-						</span> Map</a></li>					<li><a href="/reserve"><span
+					<li><a href="/map"><span class="glyphicon glyphicon-th">
+						</span> Map</a></li>
+					<li><a href="/reserve"><span
 							class="glyphicon glyphicon-tasks"> </span> Reserve</a></li>
 					<c:choose>
 						<c:when test="${userAdmin}">
@@ -46,6 +47,9 @@
 									class="glyphicon glyphicon-pencil"></span> Create</a></li>
 							<li><a href="/listReserves"><span
 									class="glyphicon glyphicon-tasks"></span> Reserves</a></li>
+							<li><a href="/stats"> <span
+									class="glyphicon glyphicon-tasks"></span> Statistics
+							</a></li>
 						</c:when>
 					</c:choose>
 
@@ -76,10 +80,9 @@
 	</div>
 
 	<c:if test="${dialogo != null}">
-	<div class="alert alert-success"  style="width: 100%;">
-    <a href="#" class="close" data-dismiss="alert">&times;</a>
-    <strong>${dialogo}</strong>
-	</div>
+		<div class="alert alert-success" style="width: 100%;">
+			<a href="#" class="close" data-dismiss="alert">&times;</a> <strong>${dialogo}</strong>
+		</div>
 	</c:if>
 
 	<table class="table" style="width: 100%;" align="center">
@@ -121,8 +124,8 @@
 	</table>
 
 	<hr />
-	
-	
+
+
 
 
 	<footer>

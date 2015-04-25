@@ -113,10 +113,10 @@ public class Reserve implements Serializable {
 			day = "" + calendar.get(Calendar.DAY_OF_MONTH);
 		}
 
-		if (calendar.get(Calendar.HOUR) <= 9) {
-			hour = "0" + calendar.get(Calendar.HOUR);
+		if (calendar.get(Calendar.HOUR_OF_DAY) <= 9) {
+			hour = "0" + calendar.get(Calendar.HOUR_OF_DAY);
 		} else {
-			hour = "" + calendar.get(Calendar.HOUR);
+			hour = "" + calendar.get(Calendar.HOUR_OF_DAY);
 		}
 
 		if (calendar.get(Calendar.MINUTE) <= 9) {
@@ -131,17 +131,17 @@ public class Reserve implements Serializable {
 	}
 
 	public boolean ocupado(Reserve reserve2) {
-		// TODO comprobar que funciona bien
-		System.out.println("Mi fecha:  " + this.getStart());
-		System.out.println("Nueva fecha:  " + reserve2.getStart());
+		// // TODO comprobar que funciona bien
+		// System.out.println("Mi fecha:  " + this.getStart());
+		// System.out.println("Nueva fecha:  " + reserve2.getStart());
 		String mifecha = this.getStart().split(" ")[0];
 		String nuevafecha = reserve2.getStart().split(" ")[0];
-		System.out.println("Mi fecha:  " + mifecha);
-		System.out.println("Nueva fecha:  " + nuevafecha);
+		// System.out.println("Mi fecha:  " + mifecha);
+		// System.out.println("Nueva fecha:  " + nuevafecha);
 
 		// solo comrpuebo si mismo dia
 		if (mifecha.equals(nuevafecha)) {
-			System.out.println("Mismo dia");
+			// System.out.println("Mismo dia");
 			// compruebo que la hora sea la misma o parecida
 
 			int Smihora = Integer.parseInt(this.getStart().split("   ")[1]
@@ -160,16 +160,16 @@ public class Reserve implements Serializable {
 					.split(":")[0]);
 			int Enuevomin = Integer.parseInt(reserve2.getEnd().split("   ")[1]
 					.split(":")[1]);
-			System.out.println("Mi start y nuevo fin");
-			System.out.println("Mi hora:  " + Smihora);
-			System.out.println("Mi min:  " + Smimin);
-			System.out.println("nuevahora:  " + Enuevahora);
-			System.out.println("nuevomin:  " + Enuevomin);
-			System.out.println("Mi fin y nuevo start");
-			System.out.println("Mi hora:  " + Emihora);
-			System.out.println("Mi min:  " + Emimin);
-			System.out.println("nuevahora:  " + Snuevahora);
-			System.out.println("nuevomin:  " + Snuevomin);
+			// System.out.println("Mi start y nuevo fin");
+			// System.out.println("Mi hora:  " + Smihora);
+			// System.out.println("Mi min:  " + Smimin);
+			// System.out.println("nuevahora:  " + Enuevahora);
+			// System.out.println("nuevomin:  " + Enuevomin);
+			// System.out.println("Mi fin y nuevo start");
+			// System.out.println("Mi hora:  " + Emihora);
+			// System.out.println("Mi min:  " + Emimin);
+			// System.out.println("nuevahora:  " + Snuevahora);
+			// System.out.println("nuevomin:  " + Snuevomin);
 			if (Enuevahora < Smihora || Emihora < Snuevahora)
 				return false; // reservo
 			else {

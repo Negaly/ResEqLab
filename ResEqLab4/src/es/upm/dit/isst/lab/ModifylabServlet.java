@@ -84,7 +84,7 @@ public class ModifylabServlet extends HttpServlet {
 					Calendar.YEAR),
 					Calendar.getInstance().get(Calendar.MONTH) + 1, Calendar
 							.getInstance().get(Calendar.DATE), Calendar
-							.getInstance().get(Calendar.HOUR), Calendar
+							.getInstance().get(Calendar.HOUR_OF_DAY), Calendar
 							.getInstance().get(Calendar.MINUTE));
 
 			Calendar end = start;
@@ -92,6 +92,26 @@ public class ModifylabServlet extends HttpServlet {
 			// ///////////////Gestion de req y resp////////////////////////////
 
 			Reserve reserva = new Reserve(start, end, "user", 26);
+			// ////////
+			for (int i = 0; i < map.length; i++) {
+				for (int j = 0; j < map[0].length; j++) {
+					try {
+						map[i][j] = resourcedao.getResource(labdao
+								.getLab()
+								.getMapaIDs()
+								.get(Integer.parseInt(Integer.toString(i)
+										+ Integer.toString(j))));
+						System.out.println(map[i][j].getTitle());
+					} catch (Exception e) {
+						map[i][j] = null;
+					} finally {
+					}
+
+				}
+			}
+
+			// ///////////
+
 			int[][] mapa = reservedao.mapCheck(map, reserva);
 
 			req.getSession().setAttribute("user", user);

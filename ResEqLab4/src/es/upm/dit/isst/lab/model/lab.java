@@ -19,10 +19,14 @@ public class lab implements Serializable {
 	private Long id;
 	private String title = "Unico";
 	private Resource[][] mapa = new Resource[10][10];
+	private List<Long> mapaIDs;
 
 	public lab(int vertical, int horizontal) {
 
 		this.mapa = new Resource[vertical][horizontal];
+		for (int i = 0; i < 55; i++) {
+			mapaIDs.add(i, (long) i);
+		}
 
 	}
 
@@ -43,6 +47,27 @@ public class lab implements Serializable {
 
 		this.mapa = mapa;
 		// System.out.println(mapa[0][0]);
+	}
+
+	public List<Long> getMapaIDs() {
+		return mapaIDs;
+	}
+
+	public void setMapaIDs(List<Long> mapaIDs) {
+		this.mapaIDs = mapaIDs;
+	}
+
+	public void setMapaIDsPos(String x, String y, Long resourceId) {
+
+		if (this.mapaIDs.size() < 55) {
+			Long i = Long.parseLong("0");
+			for (; i < 55; i++) {
+				this.mapaIDs.add(i);
+			}
+		}
+		System.out.println(Integer.parseInt(x + y));
+		this.mapaIDs.remove(Integer.parseInt(x + y));
+		this.mapaIDs.add(Integer.parseInt(x + y), resourceId);
 	}
 
 }
